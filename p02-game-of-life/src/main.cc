@@ -15,6 +15,7 @@
 #include "../lib/Reflective.h"
 #include "../lib/tools.h"
 #include "../lib/OpenHot.h"
+#include "../lib/OpenCold.h"
 
 int main (int argc, char* argv[]) {
   ProgramArguments args = ParseArguments(argc, argv);
@@ -40,10 +41,17 @@ int main (int argc, char* argv[]) {
     }
   } else if (args.border_type == "openhot") {
     if (args.init_file == "") {
-      lattice = new OpenHot(new_rows, new_cols, reflective);
+      lattice = new OpenHot(new_rows, new_cols, openHot);
       lattice->RellenarTablero();
     } else {
-      lattice = new OpenHot("input.txt", reflective);    
+      lattice = new OpenHot("input.txt", openHot);    
+    }
+  } else if (args.border_type == "opencold") {
+    if (args.init_file == "") {
+      lattice = new OpenCold(new_rows, new_cols, openCold);
+      lattice->RellenarTablero();
+    } else {
+      lattice = new OpenCold("input.txt", openCold);    
     }
   }
   // std::cout << lattice[0][Position(1,3)].vecindad(*lattice) << std::endl;
