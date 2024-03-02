@@ -65,6 +65,7 @@ int main (int argc, char* argv[]) {
   bool mostrar_tablero = true;
   std::cout << "\nTablero inicial:\n" << *lattice << std::endl;
   UsoLetras();
+  std::ofstream outfile("output.txt");
   while (std::cin >> entrada) {
     std::cout << std::endl;
     switch (entrada) {
@@ -91,7 +92,11 @@ int main (int argc, char* argv[]) {
       mostrar_tablero = false;
       std::cout << "La población en el tablero es: " << lattice->Population() << std::endl;
       break;
-
+    case 's':
+      std::cout << "El tablero se guardará en el fichero output.txt" << std::endl;
+      outfile << *lattice << std::endl;
+      outfile.close();
+      break;
     default:
       std::cout << "Error, letra no reconocida " << std::endl;
       break;
