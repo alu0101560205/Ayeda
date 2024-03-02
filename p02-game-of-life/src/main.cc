@@ -16,6 +16,7 @@
 #include "../lib/tools.h"
 #include "../lib/OpenHot.h"
 #include "../lib/OpenCold.h"
+#include "../lib/Periodic.h"
 
 int main (int argc, char* argv[]) {
   ProgramArguments args = ParseArguments(argc, argv);
@@ -52,6 +53,13 @@ int main (int argc, char* argv[]) {
       lattice->RellenarTablero();
     } else {
       lattice = new OpenCold("input.txt", openCold);    
+    }
+  } else if (args.border_type == "periodic") {
+    if (args.init_file == "") {
+      lattice = new Periodic(new_rows, new_cols, periodic);
+      lattice->RellenarTablero();
+    } else {
+      lattice = new Periodic("input.txt", periodic);    
     }
   }
   // std::cout << lattice[0][Position(1,3)].vecindad(*lattice) << std::endl;
