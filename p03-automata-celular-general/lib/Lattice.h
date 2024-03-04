@@ -19,8 +19,8 @@ class Lattice {
     ~Lattice() { }
     virtual Cell& getCell() (Position* pos) = 0;
     virtual void nextGeneration() = 0;
-    virtual Cell& Lattice::operator[](Position*) const = 0;
-    virtual int Lattice::Population() const = 0;
+    virtual Cell& operator[](Position*) const = 0;
+    virtual int Population() const = 0;
     virtual std::ostream& display(std::ostream&) = 0;
     friend std::ostream & operator<<(std::ostream& os, Lattice& lattice) {
       lattice.display(os);
