@@ -24,7 +24,7 @@ class Cell {
     Cell(const Position& position, const State& initial_state = 0) : state_(initial_state), next_state_(0), position_(position) {} // Constructor
     State getState() const { return state_; }
     void setState(const State& new_state) {state_ = new_state; }
-    virtual void nextState(const Lattice&) = 0;
+    virtual int nextState(const Lattice&) = 0;
     virtual std::ostream& display(std::ostream&) = 0;
     Position getPosition() const { return position_; }
     // void setPosition(const Position& pos) { position_ = pos;}

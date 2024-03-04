@@ -4,21 +4,18 @@
   * Grado en Ingeniería Informática
   * Algoritmos y Estructuras de Datos Avanzada
   *
-  * @file CellACE.h
+  * @file CellACE110.h
   * @author Estela Fernández Trujillo alu0101560205@ull.edu.es
   * @date Mar 03 2024
   */
 
-#ifndef CELLACE_H
-#define CELLACE_H
+#ifndef CELLACE110_H
+#define CELLACE110_H
+#include "CellACE.h"
 
-#include <iostream>
-#include "Cell.h"
-
-class CellACE : public Cell {
+class CellACE110 : public CellACE {
   public:
-    virtual int nextState(const Lattice& latticce) override = 0;
-    virtual std::ostream& display(std::ostream&) override = 0;
+    int nextState(const Lattice& lattice);
 };
 
-#endif // CELLACE_H
+#endif // CELLACE110_H
