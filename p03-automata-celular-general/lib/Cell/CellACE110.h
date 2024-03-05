@@ -15,7 +15,8 @@
 
 class CellACE110 : public CellACE {
   public:
-    void nextState(const Lattice1D& lattice);
+    CellACE110(const State& state, Position* position) : CellACE(state, position) {}
+    void nextState(const Lattice& lattice) override;
 };
 
 #endif // CELLACE110_H

@@ -9,7 +9,15 @@
   * @date Mar 03 2024
   */
 
-#include "../lib/Cell.h"
+#include "../lib/Cell/Cell.h"
+
+/**
+ * @brief Constructor de Cell
+*/
+Cell::Cell(const State& initial_state, Position* position) {
+  state_ = initial_state;
+  position_ = position;
+}
 
 /**
  * @brief Método para acceder a la vecindad y contar el número de

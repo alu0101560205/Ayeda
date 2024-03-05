@@ -15,10 +15,17 @@
 #include <iostream>
 #include "Cell.h"
 
+struct Vecindad {
+  State left;
+  State right;
+};
+
 class CellACE : public Cell {
   public:
-    virtual void nextState(const Lattice1D& latticce) override = 0;
-    virtual std::ostream& display(std::ostream&) override = 0;
+    CellACE(const State& state, Position* position) : Cell(state, position) {}
+    virtual void nextState(const Lattice& latticce) = 0;
+  protected:
+    Vecindad getNeighbors(Position* pos, Lattice& lattice);
 };
 
 #endif // CELLACE_H
