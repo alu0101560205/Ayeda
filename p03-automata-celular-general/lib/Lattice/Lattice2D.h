@@ -15,25 +15,18 @@
 
 class Lattice2D : public Lattice {
   public:
-    Lattice2D (int row, int col) : Lattice(), rows_(row), cols_(col) {
-      initializeBoard();
-    }
+    Lattice2D (int row, int col);
+    Lattice2D (const char* filename);
+    virtual ~Lattice2D();
+    virtual Cell& getCell(Position*) const = 0;
+    virtual void nextGeneration();
+    int Population();
+    virtual std::ostream& Display(std::ostream&) = 0;
+    virtual Cell& operator[](Position*) const = 0;
   protected:
     int rows_;
     int cols_;
     std::vector<std::vector<Cell*>> board_;
-    Cell dead_cell_;
-
-    void initializeBoard() {
-    // Inicializar el tablero con células muertas
-      for (int i = 0; i < rows_; ++i) {
-        std::vector<Cell*> row;
-        for (int j = 0; j < cols_; ++j) {
-          row.push_back(new Cell(/* argumentos del constructor de Cell */));
-        }
-        board_.push_back(row);
-      }
-    }
 };
 
 #endif // LATTICE2D_H
