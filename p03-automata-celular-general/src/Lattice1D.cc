@@ -46,7 +46,7 @@ int Lattice1D::Population() const {
 */
 std::ostream& Lattice1D::display(std::ostream& os) {
   for (int i = 0; i < getSize(); i++) {
-    os << (cells_[i]->getState() == 1 ? 'X' : '.');
+    os << (cells_[i]->getState() == 1 ? 'X' : '.') << ' ';
   }
   return os;
 }
@@ -54,13 +54,15 @@ std::ostream& Lattice1D::display(std::ostream& os) {
 /**
  * @brief Método para devolver la célula en una posición dada
 */
-Cell& Lattice1D::getCell() (Position* pos) {
-  return cells_[pos];
+Cell& Lattice1D::getCell (const PositionDim<1>& pos) {
+  int index = pos[0];
+  return *(cells_[index]);
 }
 
 /**
  * @brief Sobrecarga del operador []
 */
-Cell& Lattice1D::operator[](Position* pos) const {
-  return cells_[pos];
+Cell& Lattice1D::operator[](const PositionDim<1>& pos) const {
+  int index = pos[0];
+  return *(cells_[index]);
 }

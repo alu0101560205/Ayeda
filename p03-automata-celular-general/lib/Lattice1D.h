@@ -18,8 +18,8 @@ class Lattice1D : public Lattice {
     void nextGeneration();
     int Population() const;
     std::ostream& display(std::ostream&);
-    Cell& getCell() (Position* pos);
-    Cell& operator[](Position* pos) const;
+    Cell& getCell (const PositionDim<1>& pos);
+    Cell& operator[](const PositionDim<1>& pos) const;
     int getSize() const { return size_; }
   private:
     int size_;
