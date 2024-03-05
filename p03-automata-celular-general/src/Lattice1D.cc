@@ -9,8 +9,8 @@
   * @date Mar 03 2024
   */
 
-#include "../lib/Lattice1D.h"
-#include "../lib/Cell.h"
+#include "../lib/Lattice/Lattice1D.h"
+#include "../lib/Cell/Cell.h"
 
 /**
  * @brief Método para que el autómata evolucione

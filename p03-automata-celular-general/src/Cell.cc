@@ -12,7 +12,7 @@
 #include "../lib/Cell/Cell.h"
 
 /**
- * @brief Constructor de Cell
+ * @brief Constructor de la clase Cell
 */
 Cell::Cell(const State& initial_state, Position* position) {
   state_ = initial_state;
@@ -20,8 +20,7 @@ Cell::Cell(const State& initial_state, Position* position) {
 }
 
 /**
- * @brief Método para acceder a la vecindad y contar el número de
- * células vivas
+ * @brief Método para acceder a la vecindad
 */
 int Cell::vecindad(Lattice& lattice, int second, int first) {
   int total_cells_alive{0};
@@ -37,31 +36,6 @@ int Cell::vecindad(Lattice& lattice, int second, int first) {
   total_cells_alive += lattice.getCell({i + 1, j - 1}).getState(); // Esquina inferior izquierda
   total_cells_alive += lattice.getCell({i, j - 1}).getState(); // Centro izquierda
   return total_cells_alive;
-}
-
-/**
- * @brief Método para aplicar la función de transición para obtener
- * el estado de la célula en la siguiente generación
-*/
-int Cell::nextState(Lattice& lattice) {
-  int first = this->getPosition().first;
-  int second = this->getPosition().second;
-  //std::cout << "Entré a nextstste\n";
-  int alive_cells = vecindad(lattice, second, first);
-  if (getState() == 1) { // Si está viva
-    if (alive_cells == 2 ||  alive_cells == 3) {
-      next_state_ = 1;
-    } else {
-      next_state_ = 0;
-    }
-  } else if (getState() == 0) { // Si está muerta
-    if (alive_cells == 3) {
-      next_state_ = 1;
-    } else {
-      next_state_ = 0;
-    }
-  }
-  return getState(); // Devolvemos el estado de la célula después de ser actualizado
 }
 
 /**
