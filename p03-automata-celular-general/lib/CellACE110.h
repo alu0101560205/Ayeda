@@ -15,7 +15,7 @@
 
 class CellACE110 : public CellACE {
   public:
-    int nextState(const Lattice& lattice);
+    void nextState(const Lattice1D& lattice);
 };
 
 #endif // CELLACE110_H

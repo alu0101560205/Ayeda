@@ -17,7 +17,7 @@
 
 class CellACE : public Cell {
   public:
-    virtual int nextState(const Lattice& latticce) override = 0;
+    virtual void nextState(const Lattice1D& latticce) override = 0;
     virtual std::ostream& display(std::ostream&) override = 0;
 };
 

@@ -24,12 +24,12 @@ class Cell {
     Cell(const Position& position, const State& initial_state = 0) : state_(initial_state), next_state_(0), position_(position) {} // Constructor
     State getState() const { return state_; }
     void setState(const State& new_state) {state_ = new_state; }
-    virtual int nextState(const Lattice&) = 0;
+    virtual void nextState(const Lattice&) = 0;
     virtual std::ostream& display(std::ostream&) = 0;
     Position getPosition() const { return position_; }
     // void setPosition(const Position& pos) { position_ = pos;}
     void updateState() { state_ = next_state_; }
-    int nextState(Lattice& lattice);
+    // void nextState(Lattice& lattice);
     int vecindad(Lattice& lattice, int second, int first);
     friend std::ostream& operator<<(std::ostream&, const Cell&);
   protected:

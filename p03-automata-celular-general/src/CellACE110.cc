@@ -14,7 +14,7 @@
 /**
  * @brief Método para aplicar la función de transición
 */
-int CellACE110::nextState(const Lattice& lattice) {
+void CellACE110::nextState(const Lattice1D& lattice) {
   int lattice_size = lattice.getSize();
   State left_state, right_state;
   switch (lattice.getBorder()) {
