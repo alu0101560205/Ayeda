@@ -15,13 +15,14 @@
 
 class Lattice1D : public Lattice {
   public:
+    Lattice1D (int size) : size_(size), cells_(new Cell*[size]) {}
     void nextGeneration();
     int Population() const;
     std::ostream& display(std::ostream&);
-    Cell& getCell (const PositionDim<1>& pos);
+    virtual Cell& getCell (const PositionDim<1>& pos) = 0;
     Cell& operator[](const PositionDim<1>& pos) const;
     int getSize() const { return size_; }
-  private:
+  protected:
     int size_;
     Cell** cells_;
 };
