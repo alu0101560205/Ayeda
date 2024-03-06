@@ -25,6 +25,7 @@ class CellACE : public Cell {
     CellACE(const State& state, Position* position) : Cell(state, position) {}
     virtual void nextState(const Lattice& latticce) = 0;
   protected:
+    void display(std::ostream&);
     Vecindad getNeighbors(Position* pos, Lattice& lattice);
 };
 
