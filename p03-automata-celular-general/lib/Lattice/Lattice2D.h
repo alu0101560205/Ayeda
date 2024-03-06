@@ -13,6 +13,7 @@
 #define LATTICE2D_H
 #include "Lattice.h"
 #include "Cell/CellLife.h"
+#include "../Factory/FactoryCell.h"
 
 class Lattice2D : public Lattice {
   public:

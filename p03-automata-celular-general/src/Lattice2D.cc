@@ -27,7 +27,7 @@ Lattice2D::Lattice2D (int row, int col) {
     for (int j = 0; j < cols_; j++) {
       PositionDim<2> pos(i, j); // Posición de la célula en el tablero
       State state = 0; // Estado inicial a muerta
-      board_[i][j] = new CellLife(pos, state); // Creamos la nueva célula y la agregamos al tablero
+      board_[i][j] = FactoryCell (pos, state); // Creamos la nueva célula y la agregamos al tablero
     }
   }
 }
