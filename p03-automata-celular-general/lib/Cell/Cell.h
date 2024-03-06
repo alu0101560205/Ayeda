@@ -28,6 +28,7 @@ class Cell {
     void updateState() { state_ = next_state_; }
     int vecindad(Lattice& lattice, int second, int first);
     friend std::ostream& operator<<(std::ostream&, const Cell&);
+    Position* getPosition() const { return position_; }
   protected:
     virtual void display(std::ostream&) = 0;
     State state_; // Estado de la célula

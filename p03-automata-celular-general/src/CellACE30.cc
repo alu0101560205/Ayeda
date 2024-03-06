@@ -12,8 +12,9 @@
 #include "../lib/Cell/CellACE30.h"
 
 void CellACE30::nextState (const Lattice& lattice) {
-  State left_state = lattice.getLeftNeighborState(getPosition());
-  State right_state = lattice.getRightNeighborState(getPosition());
+  PositionDim<1> current_pos = getPosition();
+  State left_state = lattice.getState(current_pos[0] - 1);
+  State right_state = lattice.getState(current_pos[0] + 1);
   // Aplicar la regla 30 para calcular el nuevo estado
-  next_state_ = (left_state != right_state) ? 1 : 0;
+  next_state_ = ((left_state + state_ + right_state) + (state_ * right_state)) % 2;
 }

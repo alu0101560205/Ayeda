@@ -12,6 +12,7 @@
 #ifndef LATTICE2D_H
 #define LATTICE2D_H
 #include "Lattice.h"
+#include "Cell/CellLife.h"
 
 class Lattice2D : public Lattice {
   public:
@@ -23,6 +24,8 @@ class Lattice2D : public Lattice {
     int Population();
     virtual std::ostream& Display(std::ostream&) = 0;
     virtual Cell& operator[](Position*) const = 0;
+    int getRows() const { return rows_; }
+    int getCols() const { return cols_; }
   protected:
     int rows_;
     int cols_;

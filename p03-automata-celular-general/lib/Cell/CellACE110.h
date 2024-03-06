@@ -12,6 +12,7 @@
 #ifndef CELLACE110_H
 #define CELLACE110_H
 #include "CellACE.h"
+#include "Position.h"
 
 class CellACE110 : public CellACE {
   public:

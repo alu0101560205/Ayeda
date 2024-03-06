@@ -11,6 +11,7 @@
 #ifndef CELLACE30_H
 #define CELLACE30_H
 #include "CellACE.h"
+#include "Position.h"
 
 class CellACE30 : public CellACE {
   public:
