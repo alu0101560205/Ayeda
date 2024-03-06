@@ -16,7 +16,7 @@
 class CellLife : public Cell {
   public:
     CellLife(const State& state, Position* position) : Cell(state, position) {}
-    void nextState(Lattice&);
+    void nextState(Lattice& lattice);
   protected:
     void display(std::ostream&);
     int getNeighbors(Position* pos, Lattice& lattice);
