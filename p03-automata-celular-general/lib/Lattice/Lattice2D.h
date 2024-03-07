@@ -14,6 +14,8 @@
 #include "Lattice.h"
 #include "Cell/CellLife.h"
 #include "../Factory/FactoryCell.h"
+#include <fstream>
+
 
 class Lattice2D : public Lattice {
   public:
@@ -30,6 +32,8 @@ class Lattice2D : public Lattice {
   protected:
     int rows_;
     int cols_;
+    int neg_rows_;
+    int neg_cols_;
     std::vector<std::vector<Cell*>> board_;
 };
 

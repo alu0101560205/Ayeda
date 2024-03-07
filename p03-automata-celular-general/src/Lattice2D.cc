@@ -33,6 +33,53 @@ Lattice2D::Lattice2D (int row, int col) {
 }
 
 /**
+ * @brief Constructor desde fichero
+*/
+Lattice2D::Lattice2D (const char* filename) {
+  std::ifstream file(filename); // Abrimos el archivo
+  if (!file.is_open()) {
+    throw std::runtime_error("No se pudo abrir el archivo");
+  }
+  // Leemos las dimensiones del tablero
+  int rows{0}, cols{0};
+  file >> rows >> cols;
+  if (rows <= 0 || cols <= 0) { // Si las dimensiones son inválidas
+    throw std::runtime_error("Dimensiones del tablero no válidas");
+  }
+  // Redimensionamos el tablero con las dimensiones especificadas
+  rows_ = rows;
+  cols_ = cols;
+  board_.resize(rows_);
+  for (int i = 0; i < rows_; i++) {
+    board_[i].resize(cols_);
+  }
+  // Leemos los estados de las células del archivo
+  char cellState;
+  for (int i = 0; i < rows_; i++) {
+    for (int j = 0; j < cols_; j++) {
+      file >> cellState;
+      if (cellState == 'X') {
+        board_[i][j] = new Cell({i, j}, 1); // Nueva célula viva en la posición (i,j)
+      } else if (cellState == '.') {
+        board_[i][j] = new Cell({i, j}, 0); // Nueva cálula muerta en la posición (i,j)
+      }
+    }
+  }
+  file.close(); // Cerramos el archivo
+}
+
+/**
+ * @brief Destructor de la clase Lattice
+*/
+Lattice2D::~Lattice2D() {
+  for (int i = 0; i < rows_; i++) {
+    for (int j = 0; j < cols_; j++) {
+      delete board_[i][j];
+    }
+  }
+}
+
+/**
  * @brief Método para calcular la población en el retículo
 */
 int Lattice2D::Population() {

@@ -86,6 +86,60 @@ void Lattice2DNoBorder::nextGeneration() {
       next_gen[i][j] = &current_cell;
     }
   }
+  expandMatrix();
   // Reemplazamos el tablero actual con la nueva generación
   board_ = next_gen;
+}
+
+/**
+ * @brief Método para expandir la matriz en caso de que haya una
+ * célula viva en el borde del tablero.
+*/
+void Lattice2DNoBorder::expandMatrix() {
+  bool exp_arriba{false}, exp_abajo{false}, exp_izq{false}, exp_der{false};
+  for (int i = 0; i < rows_; i++) { // Valoramos si expandir columnas
+    if (board_[i][0]->getState() == 1) { // Lateral inzquierdo de la matriz
+      exp_izq = true;
+    } else if (board_[i][cols_ - 1]->getState() == 1) { // Lateral derecho de la matriz
+      exp_der = true;
+    }
+  }
+  for (int j = 0; j < cols_; j++) { // Valoramos si expandir filas
+    if (board_[0][j]->getState() == 1) { // Borde superior
+      exp_arriba = true;
+    } else if (board_[rows_ - 1][j]->getState() == 1) { // Borde inferior
+      exp_abajo = true;
+    }
+  }
+  // Agregamos filas y/o columnas
+  if (exp_arriba) { // Agregar fila arriba
+    std::vector<Cell*> new_row1(cols_, nullptr);
+    board_.emplace(board_.begin(), new_row1); // Agregamos fila 
+    rows_++; // Incrementar el número de filas
+    neg_rows_++;
+    for (int i = 0; i < cols_; i++) {
+      board_[0][i] = new Cell({-neg_rows_, i - neg_cols_});
+    }
+  }
+  if (exp_abajo) {
+    std::vector<Cell*> new_row2(cols_, nullptr); // Creamos nueva fila
+    board_.push_back(new_row2);
+    rows_++;
+    for (int i = 0; i < cols_; i++) {
+      board_[rows_ - 1][i] = new Cell({((rows_ - 1) - neg_rows_), i - neg_cols_});
+    }
+  }
+  if (exp_der) {
+    for (int i = 0; i < rows_; i++) {
+        board_[i].push_back(new Cell({i - neg_rows_, (cols_ - 1) - neg_cols_})); // Agrega una nueva célula al final de cada fila
+    }
+    ++cols_;
+  }
+  if (exp_izq) {
+    ++cols_;
+    neg_cols_++;
+    for (int i = 0; i < rows_; i++) {
+        board_[i].emplace(board_[i].begin(), new Cell({i - neg_rows_, -neg_cols_})); // Inserta una nueva célula al principio de cada fila
+    }
+  }
 }

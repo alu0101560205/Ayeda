@@ -24,6 +24,7 @@ class Lattice2DNoBorder : public Lattice2D {
   Lattice2DNoBorder(int row, int col) : Lattice2D(row, col) {}
   Cell& getCell(Position*) const;
   void nextGeneration();
+  void expandMatrix();
 };
 
 #endif

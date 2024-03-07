@@ -29,7 +29,7 @@ class PositionDim : public Position {
       va_list vl;
       va_start(vl, sz); // v1 apuntará al primer argumentos después de sz
       for(int d = 0; d < Dim; d++) {
-        Coordinates[d] = va_arg(vl, Coor_t);
+        Coordinates_[d] = va_arg(vl, Coor_t);
       }
       va_end(vl); // Finalizamos el uso de la lista variable de argumentos
     }
