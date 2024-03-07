@@ -15,6 +15,7 @@
 #include <iostream>
 #include <vector>
 #include "Position.h"
+#include "../Lattice/Lattice.h"
 typedef unsigned char State;
 
 class Lattice; // incluimos la clase Lattice

@@ -60,7 +60,7 @@ int Cell::vecindad(Lattice& lattice, int second, int first) {
   total_cells_alive += lattice.getCell({i + 1, j - 1}).getState(); // Esquina inferior izquierda
   total_cells_alive += lattice.getCell({i, j - 1}).getState(); // Centro izquierda
   */
-  // Modificación
+  // Modificación:
   total_cells_alive +=  lattice.getCell({i - 1, j}).getState(); // 1
   total_cells_alive +=  lattice.getCell({i - 2, j + 1}).getState(); // 2
   total_cells_alive +=  lattice.getCell({i - 2, j + 4}).getState(); // 3

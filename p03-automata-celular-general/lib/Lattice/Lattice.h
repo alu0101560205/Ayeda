@@ -11,8 +11,8 @@
 
 #ifndef LATTICE_H
 #define LATTICE_H
-#include "Position.h"
-#include "Cell.h"
+#include "../Position/Position.h"
+#include "../Cell/Cell.h"
 
 class Lattice {
   public:
