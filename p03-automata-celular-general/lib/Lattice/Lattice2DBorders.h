@@ -12,6 +12,7 @@
 #ifndef LATTICE2DBORDERS_H
 #define LATTICE2DBORDERS_H
 #include "Lattice2D.h"
+#include "../Factory/FactoryCell.h"
 
 class Lattice2DReflective : public Lattice2D {
   public:
