@@ -13,19 +13,57 @@
 #define DISPERSIONFUNCTION_H
 #include <iostream>
 
+/**
+ * @brief Clase base para implementar las funciones de dispersión
+*/
 template <typename Key>
 class DispersionFunction {
   public:
-    virtual unsigned operator()(const Key&) const = 0;
+    virtual unsigned operator()(const Key& key) const = 0;
+    ~DispersionFunction() {}
+  protected:
+    unsigned tableSize_;
 };
 
+/**
+ * @brief Función módulo
+*/
 template <typename Key>
-class ModuleDispersion {
+class ModuleDispersion : public DispersionFunction<Key> {
   public:
-    ModuleDispersion(unsigned size) : tableSize(size) {}
-    unsigned opera
-  private:
-    unsigned tableSize_;
+    ModuleDispersion(unsigned int size) : tableSize_(size) {}
+    unsigned operator()(const Key& key) const override {
+      return key % tableSize_;
+    }
+};
+
+/**
+ * @brief Función basada en la suma
+*/
+template <typename Key>
+class SumDispersion : public DispersionFunction<Key> {
+  public:
+    SumDispersion(unsigned int size) : tableSize_(size) {}
+    unsigned operator()(const Key& key) const override {
+      unsigned sum{0};
+      for (const auto& val : key) {
+        sum += val;
+      }
+      return sum % tableSize_;
+    }
+};
+
+/**
+ * @brief Función pseudoaleatoria
+*/
+template <typename Key>
+class PseudorandomDispersion : public DispersionFunction<Key> {
+  public:
+    PseudorandomDispersion(unsigned int size) tableSize_(size) {}
+    unsigned operator()(const Key& key) const override {
+      srand(key);
+      return rand() % tableSize_;
+    }
 };
 
 #endif
