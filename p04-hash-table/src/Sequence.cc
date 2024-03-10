@@ -15,7 +15,7 @@
  * @brief Función search para dispersión abierta
 */
 template <class Key>
-bool OpenAddressingSequence<Key>::search(const Key& key) const {
+bool  DynamicSequence<Key>::search(const Key& key) const {
   for (const auto& element : elements_) {
     if (element == key) {
       return true;
@@ -28,7 +28,7 @@ bool OpenAddressingSequence<Key>::search(const Key& key) const {
  * @brief Función insert para dispersión abierta
 */
 template <class Key>
-bool OpenAddressingSequence<Key>::insert(const Key& key) {
+bool DynamicSequence<Key>::insert(const Key& key) {
   elements_.push_back(key); // Insertar el elemento en la lista
   return true;
 }
@@ -36,8 +36,8 @@ bool OpenAddressingSequence<Key>::insert(const Key& key) {
 /**
  * @brief Función search para dispersión cerrada
 */
-template <class Key, size_t blockSize>
-bool ClosedAddressingSequence<Key, blockSize>::search(const Key& key) const {
+template <class Key>
+bool StaticSequence<Key>::search(const Key& key) const {
   for (size_t i = 0; i < size_; i++) {
     if (elements_[i] == key) {
       return true;
@@ -49,11 +49,19 @@ bool ClosedAddressingSequence<Key, blockSize>::search(const Key& key) const {
 /**
  * @brief Función insert para dispersión cerrada
 */
-template <class Key, size_t blockSize>
-bool ClosedAddressingSequence<Key, blockSize>::insert(const Key& key) {
+template <class Key>
+bool StaticSequence<Key>::insert(const Key& key) {
   if (size_ < blockSize) {
     elements_[size_++] = key;
     return true;
   }
   return false;
+}
+
+/**
+ * @brief Método para verificar si la secuencia está llena
+*/
+template <class Key>
+bool StaticSequence<Key>::isFull() const {
+  return currentSize_ == blockSize_;
 }

@@ -30,7 +30,7 @@ class Sequence {
  * @brief Clase para implementar la técnica de dispersión abierta
 */
 template <class Key>
-class OpenAddressingSequence : public Sequence<Key> {
+class DynamicSequence : public Sequence<Key> {
   public:
     bool search(const Key& key) const override;
     bool insert(const Key& key) override;
@@ -41,14 +41,17 @@ class OpenAddressingSequence : public Sequence<Key> {
 /**
  * @brief Clase para implementar la técnica de dispersión cerrada
 */
-template <class Key, size_t blockSize>
-class ClosedAddressingSequence : public Sequence<Key> {
+template <class Key>
+class StaticSequence : public Sequence<Key> {
   public:
+    StaticSequence(size_t blocksz) : blockSize_(blocksz) {}
     bool search(const Key& key) const override;
     bool insert(const Key& key) override;
+    bool isFull() const;
   private:
-    std::array<Key, blockSize> elements_;
-    size_t size_ = 0; // Tamaño actual de la secuencia
+    size_t currentSize_; = 0; // Tamaño actual de la secuencia
+    const size_t blockSize_ = 0; // Tamaño del bloque
+    std::array<Key, blockSize_> elements_; // Para almacenar elementos
 };
 
 #endif
