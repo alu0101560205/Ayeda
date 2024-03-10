@@ -4,17 +4,20 @@
   * Grado en Ingeniería Informática
   * Algoritmos y Estructuras de Datos Avanzada
   *
-  * @file Hastable.cc
+  * @file HastableStatic.cc
   * @author Estela Fernández Trujillo alu0101560205@ull.edu.es
   * @date Mar 10 2024
   */
 
-#ifndef HASHTABLE_H
-#define HASHTABLE_H
+#ifndef HASHTABLESTATIC_H
+#define HASHTABLESTATIC_H
 #include "Sequence.h"
 #include "DispersionFunction.h"
 #include "ExplorationFunction.h"
 
+/**
+ * Técnica de dispersión cerrada
+*/
 template <class Key, class Container = StaticSequence<Key>>
 class HashTable : public Sequence<Key> {
   public:
