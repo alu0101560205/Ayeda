@@ -60,7 +60,7 @@ class SumDispersion : public DispersionFunction<Key> {
 template <class Key>
 class PseudorandomDispersion : public DispersionFunction<Key> {
   public:
-    PseudorandomDispersion(unsigned int size) tableSize_(size) {}
+    PseudorandomDispersion(unsigned int size) : tableSize_(size) {}
     unsigned operator()(const Key& key) const override {
       srand(key);
       return rand() % tableSize_;

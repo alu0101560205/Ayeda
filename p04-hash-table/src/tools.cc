@@ -14,10 +14,10 @@
 void Usage() {
   std::cout << "Uso: ./hashTable -ts <s> -fd <f> -hash <open|close> -bs <s> -fe <f>\n";
   std::cout << "-ts <s> : tamaño de la tabla\n";
-  std::cout << "-fd <f> : función de dispersión\n";
+  std::cout << "-fd <f> : función de dispersión -> sum, random o mod\n";
   std::cout << "-hash <open|close> : técnica de dispersión\n";
   std::cout << "-bs <s> : tamaño del bloque para dispersión cerrada\n";
-  std::cout << "-fe <f> : función de exploración para dispersión cerrada\n";
+  std::cout << "-fe <f> : función de exploración para dispersión cerrada -> linear, quadratic o double\n";
 }
 
 Options ParseArguments(int argc, char* argv[]) {

@@ -54,7 +54,7 @@ template <class Key>
 class DoubleHashingExploration : public ExplorationFunction<Key> {
   public:
     DoubleHashingExploration(DispersionFunction<Key>* hashfunct) : hashFunction_(hashfunct) {}
-    unsigend operator()(const Key& key, unsigned i) {
+    unsigend operator()(const Key& key, unsigned i) const override {
       return hashFunction_->operator()(key) * i;
     }
   private:
