@@ -18,7 +18,7 @@
 /**
  * @brief Clase función de exploración
 */
-template <typename Key>
+template <class Key>
 class ExplorationFunction {
   public:
     virtual unsigned operator()(const Key&, unsigned) const = 0;
@@ -28,7 +28,7 @@ class ExplorationFunction {
 /**
  * @brief Clase función de exploración lineal
 */
-template <typename Key>
+template <class Key>
 class LinearExploration : public ExplorationFunction<Key> {
   public:
     unsigned operator()(const Key& key, unsigned i) const override {
@@ -39,7 +39,7 @@ class LinearExploration : public ExplorationFunction<Key> {
 /**
  * @brief Clase función de exploración cuadrática
 */
-template <typename Key> 
+template <class Key> 
 class QuadraticExploration : public ExplorationFunction<Key> {
   public:
     unsigned operator()(const Key& key, unsigned i) const override {
@@ -50,7 +50,7 @@ class QuadraticExploration : public ExplorationFunction<Key> {
 /**
  * @brief Clase función de doble dispersión
 */
-template <typename Key>
+template <class Key>
 class DoubleHashingExploration : public ExplorationFunction<Key> {
   public:
     DoubleHashingExploration(DispersionFunction<Key>* hashfunct) : hashFunction_(hashfunct) {}
@@ -64,7 +64,7 @@ class DoubleHashingExploration : public ExplorationFunction<Key> {
 /**
  * @brief Clase función de redispersión
 */
-template <typename Key>
+template <class Key>
 class RehashingExploration : public ExplorationFunction<Key> {
   public:
     RehashingExploration() {}

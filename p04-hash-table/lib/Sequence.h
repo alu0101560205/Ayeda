@@ -18,7 +18,7 @@
 /**
  * @brief Clase para elegir entre dispersión abierta o cerrada
 */
-template <typename Key>
+template <class Key>
 class Sequence {
   public:
     virtual bool search(const Key& key) const = 0;
@@ -29,7 +29,7 @@ class Sequence {
 /**
  * @brief Clase para implementar la técnica de dispersión abierta
 */
-template <typename Key>
+template <class Key>
 class OpenAddressingSequence : public Sequence<Key> {
   public:
     bool search(const Key& key) const override;
@@ -41,7 +41,7 @@ class OpenAddressingSequence : public Sequence<Key> {
 /**
  * @brief Clase para implementar la técnica de dispersión cerrada
 */
-template <typename Key, size_t blockSize>
+template <class Key, size_t blockSize>
 class ClosedAddressingSequence : public Sequence<Key> {
   public:
     bool search(const Key& key) const override;

@@ -17,7 +17,7 @@
 /**
  * @brief Clase base para implementar las funciones de dispersión
 */
-template <typename Key>
+template <class Key>
 class DispersionFunction {
   public:
     virtual unsigned operator()(const Key& key) const = 0;
@@ -29,7 +29,7 @@ class DispersionFunction {
 /**
  * @brief Función módulo
 */
-template <typename Key>
+template <class Key>
 class ModuleDispersion : public DispersionFunction<Key> {
   public:
     ModuleDispersion(unsigned int size) : tableSize_(size) {}
@@ -41,7 +41,7 @@ class ModuleDispersion : public DispersionFunction<Key> {
 /**
  * @brief Función basada en la suma
 */
-template <typename Key>
+template <class Key>
 class SumDispersion : public DispersionFunction<Key> {
   public:
     SumDispersion(unsigned int size) : tableSize_(size) {}
@@ -57,7 +57,7 @@ class SumDispersion : public DispersionFunction<Key> {
 /**
  * @brief Función pseudoaleatoria
 */
-template <typename Key>
+template <class Key>
 class PseudorandomDispersion : public DispersionFunction<Key> {
   public:
     PseudorandomDispersion(unsigned int size) tableSize_(size) {}

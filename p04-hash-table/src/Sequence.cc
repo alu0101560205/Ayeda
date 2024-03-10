@@ -14,7 +14,7 @@
 /**
  * @brief Función search para dispersión abierta
 */
-template <typename Key>
+template <class Key>
 bool OpenAddressingSequence<Key>::search(const Key& key) const {
   for (const auto& element : elements_) {
     if (element == key) {
@@ -27,7 +27,7 @@ bool OpenAddressingSequence<Key>::search(const Key& key) const {
 /**
  * @brief Función insert para dispersión abierta
 */
-template <typename Key>
+template <class Key>
 bool OpenAddressingSequence<Key>::insert(const Key& key) {
   elements_.push_back(key); // Insertar el elemento en la lista
   return true;
@@ -36,7 +36,7 @@ bool OpenAddressingSequence<Key>::insert(const Key& key) {
 /**
  * @brief Función search para dispersión cerrada
 */
-template <typename Key, size_t blockSize>
+template <class Key, size_t blockSize>
 bool ClosedAddressingSequence<Key, blockSize>::search(const Key& key) const {
   for (size_t i = 0; i < size_; i++) {
     if (elements_[i] == key) {
@@ -49,7 +49,7 @@ bool ClosedAddressingSequence<Key, blockSize>::search(const Key& key) const {
 /**
  * @brief Función insert para dispersión cerrada
 */
-template <typename Key, size_t blockSize>
+template <class Key, size_t blockSize>
 bool ClosedAddressingSequence<Key, blockSize>::insert(const Key& key) {
   if (size_ < blockSize) {
     elements_[size_++] = key;
