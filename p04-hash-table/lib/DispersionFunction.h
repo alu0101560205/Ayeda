@@ -12,6 +12,7 @@
 #ifndef DISPERSIONFUNCTION_H
 #define DISPERSIONFUNCTION_H
 #include <iostream>
+#include <cstdlib>
 
 /**
  * @brief Clase base para implementar las funciones de dispersión
