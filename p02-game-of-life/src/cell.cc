@@ -50,7 +50,7 @@ int Cell::vecindad(Lattice& lattice, int second, int first) {
   int total_cells_alive{0};
   int i = first;
   int j = second;
-  /* Código original:
+  // Código original:
   total_cells_alive += lattice.getCell({i - 1, j - 1}).getState(); // Esquina sup izq
   total_cells_alive += lattice.getCell({i - 1, j}).getState(); // Centro superior
   total_cells_alive += lattice.getCell({i - 1, j + 1}).getState(); // Esquina superior derecha
@@ -59,7 +59,8 @@ int Cell::vecindad(Lattice& lattice, int second, int first) {
   total_cells_alive += lattice.getCell({i + 1, j}).getState(); // Centro inferior
   total_cells_alive += lattice.getCell({i + 1, j - 1}).getState(); // Esquina inferior izquierda
   total_cells_alive += lattice.getCell({i, j - 1}).getState(); // Centro izquierda
-  */
+  
+  /*
   // Modificación:
   total_cells_alive +=  lattice.getCell({i - 1, j}).getState(); // 1
   total_cells_alive +=  lattice.getCell({i - 2, j + 1}).getState(); // 2
@@ -74,6 +75,7 @@ int Cell::vecindad(Lattice& lattice, int second, int first) {
   total_cells_alive +=  lattice.getCell({i + 1, j + 1}).getState(); // 11
   total_cells_alive +=  lattice.getCell({i, j + 3}).getState(); // 12
   total_cells_alive +=  lattice.getCell({i, j + 4}).getState(); // 13
+  */
   return total_cells_alive;
 }
 
