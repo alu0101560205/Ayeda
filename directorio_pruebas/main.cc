@@ -37,21 +37,20 @@
 
 
 int main() {
-    // Definir una función de dispersión
-    ModuleDispersion<int> dispersionFunction(100); // Ejemplo de función de dispersión con una tabla de tamaño 100
+  // Definir una función de dispersión
+  ModuleDispersion<int> dispersionFunction(100); // Ejemplo de función de dispersión con una tabla de tamaño 100
 
-    // Crear una instancia de la función de redispersión
-    QuadraticExploration<int> rehashingExploration;
+  // Crear una instancia de la función de redispersión
+  QuadraticExploration<int> rehashingExploration;
 
-    // Probar la función de redispersión
-    int key = 42; // Clave de ejemplo
-    unsigned iterations = 3; // Número de iteraciones de redispersión
-
-    std::cout << "Key: " << key << std::endl;
-    for (unsigned i = 0; i < iterations; ++i) {
-        key += rehashingExploration(key, i);
-        std::cout << "Redispersión " << i + 1 << ": " << key << std::endl;
-    }
-
-    return 0;
+  // Probar la función de redispersión
+  int key = 42; // Clave de ejemplo
+  unsigned iterations = 3; // Número de iteraciones de redispersión
+  
+  std::cout << "Key: " << key << std::endl;
+  for (unsigned i = 0; i < iterations; ++i) {
+    key += rehashingExploration(key, i);
+    std::cout << "Redispersión " << i + 1 << ": " << key << std::endl;
+  }
+  return 0;
 }
