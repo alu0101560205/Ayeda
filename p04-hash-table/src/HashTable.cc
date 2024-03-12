@@ -9,4 +9,8 @@
   * @date Mar 10 2024
   */
 
-#include "../lib/HashTable.h"
+
+// Cosita preciosa solo queria decirte lo muchisimo que te quiero
+// que por mucho que algo te cueste porque es dificil tu puedes
+// sacarlo. Y si no puedes, me pides ayuda cosita preciosa.
+// Te amo mi vida <3

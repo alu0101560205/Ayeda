@@ -21,6 +21,7 @@
 using Key = NIF;
 
 int main(int argc, char* argv[]) {
+  /*
   Options options = ParseArguments(argc, argv);
   // Creamos el objeto de la función de dispersión
   DispersionFunction<Key>* dispersionFunction = nullptr;
@@ -50,5 +51,26 @@ int main(int argc, char* argv[]) {
   }
   // Creamos tabla Hash
   size_t size = options.tableSize;
-    
+  */
+    // Tamaño de la tabla hash (puedes ajustarlo según tus necesidades)
+    unsigned int tableSize = 100;
+
+    // Instancia de ModuleDispersion con tamaño de tabla
+    ModuleDispersion<int> moduleHash(tableSize);
+
+    // Instancia de SumDispersion con tamaño de tabla
+    SumDispersion<std::string> sumHash(tableSize);
+
+    // Ejemplo de uso: calcular la posición para una clave
+    int key1 = 42;
+    std::string key2 = "hello";
+
+    unsigned position1 = moduleHash(key1);
+    unsigned position2 = sumHash(key2);
+
+    // Imprime las posiciones calculadas
+    std::cout << "Posición para key1: " << position1 << std::endl;
+    std::cout << "Posición para key2: " << position2 << std::endl;
+
+    return 0;
 }

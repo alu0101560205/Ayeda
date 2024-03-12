@@ -21,7 +21,7 @@
 template <class Key>
 class ExplorationFunction {
   public:
-    virtual unsigned operator()(const Key&, unsigned) const = 0;
+    virtual unsigned operator()(const Key&, unsigned i) const = 0; // i es el intento de exploración
     virtual ~ExplorationFunction() {}
 };
 
@@ -53,12 +53,12 @@ class QuadraticExploration : public ExplorationFunction<Key> {
 template <class Key>
 class DoubleHashingExploration : public ExplorationFunction<Key> {
   public:
-    DoubleHashingExploration(DispersionFunction<Key>* hashfunct) : hashFunction_(hashfunct) {}
-    unsigend operator()(const Key& key, unsigned i) const override {
-      return hashFunction_->operator()(key) * i;
+    DoubleHashingExploration(const DispersionFunction<Key>& f) : f_(f) {}
+    unsigned operator()(const Key& key, unsigned i) const override {
+      return (f_(key) * i);
     }
   private:
-    DispersionFunction<Key>* hashFunction_; // Función de dispersión auxiliar
+    DispersionFunction<Key> f_; // Función de dispersión auxiliar f(k)
 };
 
 /**
@@ -67,14 +67,16 @@ class DoubleHashingExploration : public ExplorationFunction<Key> {
 template <class Key>
 class RehashingExploration : public ExplorationFunction<Key> {
   public:
-    RehashingExploration() {}
+    RehashingExploration(const DispersionFunction<Key>& f) : f_(f) {}
     unsigned operator()(const Key& key, unsigned i) const override {
-      srand(key); // Inicializamos la semilla con el valor de la clave
-      for (unsigned k = 0; j < i; j++) {
-        rand();
+      unsigned hashValue = f_(key);
+      for (unsigned count = 0; count < i; count++) {
+        hashValue = f_(hashValue);
       }
-      return rand();
+      return hashValue;
     }
+  private:
+    const DispersionFunction<Key>& f_; // Función de dispersión auxiliar f(k)
 };
 
 #endif

@@ -20,8 +20,10 @@
 template <class Key>
 class DispersionFunction {
   public:
+    DispersionFunction(unsigned int size) : tableSize_(size) {}
     virtual unsigned operator()(const Key& key) const = 0;
     ~DispersionFunction() {}
+    unsigned getTableSize() const { return tableSize_; }
   protected:
     unsigned tableSize_;
 };
@@ -32,9 +34,9 @@ class DispersionFunction {
 template <class Key>
 class ModuleDispersion : public DispersionFunction<Key> {
   public:
-    ModuleDispersion(unsigned int size) : tableSize_(size) {}
+    ModuleDispersion(unsigned int size) : DispersionFunction<Key>(size) {}
     unsigned operator()(const Key& key) const override {
-      return key % tableSize_;
+      return key % this->getTableSize();
     }
 };
 
@@ -44,13 +46,13 @@ class ModuleDispersion : public DispersionFunction<Key> {
 template <class Key>
 class SumDispersion : public DispersionFunction<Key> {
   public:
-    SumDispersion(unsigned int size) : tableSize_(size) {}
+    SumDispersion(unsigned int size) : DispersionFunction<Key>(size) {}
     unsigned operator()(const Key& key) const override {
       unsigned sum{0};
       for (const auto& val : key) {
         sum += val;
       }
-      return sum % tableSize_;
+      return sum % this->getTableSize();
     }
 };
 
@@ -60,10 +62,10 @@ class SumDispersion : public DispersionFunction<Key> {
 template <class Key>
 class PseudorandomDispersion : public DispersionFunction<Key> {
   public:
-    PseudorandomDispersion(unsigned int size) : tableSize_(size) {}
+    PseudorandomDispersion(unsigned int size) : DispersionFunction<Key>(size) {}
     unsigned operator()(const Key& key) const override {
       srand(key);
-      return rand() % tableSize_;
+      return rand() % this->getTableSize();
     }
 };
 

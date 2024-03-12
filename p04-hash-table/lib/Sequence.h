@@ -41,17 +41,19 @@ class DynamicSequence : public Sequence<Key> {
 /**
  * @brief Clase para implementar la técnica de dispersión cerrada
 */
-template <class Key>
+template <class Key, size_t BlockSize>
 class StaticSequence : public Sequence<Key> {
   public:
-    StaticSequence(size_t blocksz) : blockSize_(blocksz) {}
+    StaticSequence() {}
     bool search(const Key& key) const override;
     bool insert(const Key& key) override;
     bool isFull() const;
   private:
-    size_t currentSize_; = 0; // Tamaño actual de la secuencia
-    const size_t blockSize_ = 0; // Tamaño del bloque
-    std::array<Key, blockSize_> elements_; // Para almacenar elementos
+    size_t currentSize_ = 0; // Tamaño actual de la secuencia
+    // const size_t blockSize_ = 0; // Tamaño del bloque
+    std::array<Key, BlockSize> elements_; // Para almacenar elementos
 };
+
+
 
 #endif
