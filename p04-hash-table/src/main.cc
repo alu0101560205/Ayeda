@@ -10,15 +10,11 @@
   */
 
 #include <iostream>
-#include "../lib/DispersionFunction.h"
-#include "../lib/ExplorationFunction.h"
-#include "../lib/HashTableDynamic.h"
-#include "../lib/HashTableStatic.h"
-#include "../lib/Sequence.h"
-#include "../lib/tools.h"
-#include "../lib/NIF.h"
-
-using Key = NIF;
+#include "../lib/Dispersion/DispersionFunction.h"
+#include "../lib/Exploration/ExplorationFunction.h"
+#include "../lib//Sequence/Sequence.h"
+#include "../lib//Tools/tools.h"
+#include "../lib//NIF/NIF.h"
 
 int main(int argc, char* argv[]) {
   /*
