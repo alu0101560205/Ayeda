@@ -20,10 +20,13 @@
 template <class Key, class Container = StaticSequence<Key>>
 class HashTable : public Sequence<Key> {
   public:
-    HashTable<Key,Container>::HashTable(unsigned sz, DispersionFunction<Key>& fd, ExplorationFunction<Key>& fe,unsigned bsz)
+    HashTable<Key, StaticSequence<Key>>(unsigned sz, DispersionFunction<Key>& fd, ExplorationFunction<Key>& fe,unsigned bsz)
       : tableSize_(sz), fd_(fd), fe_(fe), blockSize_(bsz) {
         table_ = new Container[tableSize_];
       }
+    HashTable<Key, DynamicSequence<Key>>(unsigned sz, DispersionFunction<Key>>& fd) : tableSize_(sz), fd_(fd) {
+      table_ = new Container[tableSize_];
+    }
   private:
     size_t tableSize_; 
     Container* table_;

@@ -37,4 +37,25 @@ class StaticSequence : public Sequence<Key> {
     size_t blockSize_; // Tamaño del bloque
 };
 
+/**
+ *@brief Método para buscar un elemento en la tabla (estática) 
+*/
+template <class Key>
+bool StaticSequence<Key>::search(const Key& key) const {
+  for (size_t i = 0; i < tableSize_; i++) {
+    if (table_[k] == key) {
+      return true;
+    }
+  }
+  return false;
+}
+
+/**
+ * @brief Método para insertar un elemento en la tabla (estática)
+*/
+template <class Key>
+bool StaticSequence<Key>::insert(const Key& key) {
+  
+}
+
 #endif
