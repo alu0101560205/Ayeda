@@ -58,4 +58,17 @@ bool StaticSequence<Key>::insert(const Key& key) {
   
 }
 
+/**
+ * @brief Método para saber si la seciencia está llena
+*/
+template <class Key>
+bool StaticSequence<Key>::isFull() const {
+  for (size_t i = 0; i < tableSize_; i++) {
+    if (!table_[i]->isFull()) {
+      return false; // Si al menos una posición no está llena, la secuencia no lo está
+    }
+  }
+  return true; // Si todas las posiciones están llenas
+}
+
 #endif
