@@ -6,8 +6,9 @@ BIN_DIR := bin
 
 # Compilador y opciones
 CXX := g++
-CXXFLAGS := -std=c++11 -Wall
+CXXFLAGS := -std=c++11 -Wall -I$(LIB_DIR)
 LDFLAGS :=
+RM := rm -rf
 
 # Obtener todos los archivos .cc en el directorio src/
 SRCS := $(wildcard $(SRC_DIR)/*.cc)
@@ -16,22 +17,22 @@ SRCS := $(wildcard $(SRC_DIR)/*.cc)
 OBJS := $(patsubst $(SRC_DIR)/%.cc,$(BUILD_DIR)/%.o,$(SRCS))
 
 # Nombre del ejecutable
-TARGET := $(BIN_DIR)/hashTable
+TARGET := $(BIN_DIR)/programa
 
 # Reglas de construcción
 all: $(TARGET)
 
 $(TARGET): $(OBJS)
-    $(CXX) $(LDFLAGS) $^ -o $@
+	$(CXX) $(LDFLAGS) $^ -o $@
 
 $(BUILD_DIR)/%.o: $(SRC_DIR)/%.cc
-    $(CXX) $(CXXFLAGS) -c $< -o $@
+	$(CXX) $(CXXFLAGS) -c $< -o $@
 
 # Asegurarse de que los directorios necesarios existan
 $(shell mkdir -p $(BUILD_DIR) $(BIN_DIR))
 
 # Limpiar archivos generados
 clean:
-    $(RM) -r $(BUILD_DIR) $(TARGET)
+	$(RM) $(BUILD_DIR) $(BIN_DIR)
 
 .PHONY: all clean

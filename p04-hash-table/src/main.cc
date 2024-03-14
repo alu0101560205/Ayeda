@@ -11,10 +11,17 @@
 
 #include <iostream>
 #include "../lib/Dispersion/DispersionFunction.h"
+#include "../lib/Dispersion/ModuleDispersion.h"
+#include "../lib/Dispersion/SumDispersion.h"
 #include "../lib/Exploration/ExplorationFunction.h"
+#include "../lib/Exploration/LinearExploration.h"
+#include "../lib/Exploration/QuadraticExploration.h"
 #include "../lib//Sequence/Sequence.h"
+#include "../lib/Sequence/DynamicSequence.h"
+#include "../lib/Sequence/StaticSequence.h"
 #include "../lib//Tools/tools.h"
 #include "../lib//NIF/NIF.h"
+#include "../lib/HashTable/HashTable.h"
 
 int main(int argc, char* argv[]) {
   /*
@@ -44,29 +51,37 @@ int main(int argc, char* argv[]) {
     } else {
       throw std::invalid_argument("Función de exploración desconocida");
     }
-  }
-  // Creamos tabla Hash
-  size_t size = options.tableSize;
+  } 
   */
-    // Tamaño de la tabla hash (puedes ajustarlo según tus necesidades)
-    unsigned int tableSize = 100;
+  std::cout << "Probando con secuencia estática:" << std::endl;
+    ModuleDispersion<NIF> dispersionFunction(100);
+    LinearExploration<NIF> explorationFunction;
+    HashTable<NIF, StaticSequence<NIF>> staticHashTable(100, dispersionFunction, explorationFunction, 10);
 
-    // Instancia de ModuleDispersion con tamaño de tabla
-    ModuleDispersion<int> moduleHash(tableSize);
+    // Insertar elementos en la tabla estática
+    staticHashTable.insert(NIF(12345678));
+    staticHashTable.insert(NIF(87654321));
+    staticHashTable.insert(NIF(55555555));
 
-    // Instancia de SumDispersion con tamaño de tabla
-    SumDispersion<std::string> sumHash(tableSize);
+    // Buscar elementos en la tabla estática
+    std::cout << "Buscando elemento '12345678': " << (staticHashTable.search(NIF(12345678)) ? "Encontrado" : "No encontrado") << std::endl;
+    std::cout << "Buscando elemento '99999999': " << (staticHashTable.search(NIF(99999999)) ? "Encontrado" : "No encontrado") << std::endl;
 
-    // Ejemplo de uso: calcular la posición para una clave
-    int key1 = 42;
-    std::string key2 = "hello";
+    // // Prueba con tabla hash y secuencia dinámica
+    // std::cout << "\nProbando con secuencia dinámica:" << std::endl;
+    // SumDispersion<NIF> dispFunc(100);
+    // HashTable<NIF, DynamicSequence<NIF>> dynamicHashTable(100, dispFunc);
 
-    unsigned position1 = moduleHash(key1);
-    unsigned position2 = sumHash(key2);
+    // // Insertar elementos en la tabla dinámica
+    // dynamicHashTable.insert(NIF(12345678));
+    // dynamicHashTable.insert(NIF(87654321));
+    // dynamicHashTable.insert(NIF(55555555));
 
-    // Imprime las posiciones calculadas
-    std::cout << "Posición para key1: " << position1 << std::endl;
-    std::cout << "Posición para key2: " << position2 << std::endl;
+    // // Buscar elementos en la tabla dinámica
+    // std::cout << "Buscando elemento '12345678': " << (dynamicHashTable.search(NIF(12345678)) ? "Encontrado" : "No encontrado") << std::endl;
+    // std::cout << "Buscando elemento '99999999': " << (dynamicHashTable.search(NIF(99999999)) ? "Encontrado" : "No encontrado") << std::endl;
 
     return 0;
 }
+
+

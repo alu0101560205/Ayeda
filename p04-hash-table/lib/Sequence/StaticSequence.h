@@ -23,8 +23,7 @@ class StaticSequence : public Sequence<Key> {
       : tableSize_(tSize), fd_(fd), fe_(fe), blockSize_(bSize) {
         table_ = new Sequence<Key>*[tableSize_];
         for (size_t i = 0; i < tableSize_; i++) {
-          table_[i] = new Container[blockSize_];
-          // table_[i] = nullptr;
+          table_[i] = nullptr;
         }
       }
     bool search(const Key& key) const override;
@@ -44,7 +43,7 @@ class StaticSequence : public Sequence<Key> {
 template <class Key>
 bool StaticSequence<Key>::search(const Key& key) const {
   for (size_t i = 0; i < tableSize_; i++) {
-    if (table_[k] == key) {
+    if (table_[i] == key) {
       return true;
     }
   }
