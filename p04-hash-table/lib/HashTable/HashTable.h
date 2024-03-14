@@ -22,6 +22,7 @@ class HashTable : Sequence<Key>{
   public:
     HashTable(unsigned sz, DispersionFunction<Key>& fd, ExplorationFunction<Key>& fe,unsigned bsz)
       : tableSize_(sz), fd_(fd), fe_(fe), blockSize_(bsz) {
+        table_ = new Container*[tableSize_];
         for (size_t i = 0; i < tableSize_; i++) {
           table_[i] = new Container[tableSize_];
         }

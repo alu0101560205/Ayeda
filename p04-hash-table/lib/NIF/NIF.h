@@ -18,9 +18,10 @@ class NIF {
   public:
     NIF() : value_(rand() % 100000000) {} // Constructor por defecto que inicializa un dni aleatorio
     NIF(long int val) : value_(val) {} // Constructor
-    bool operator==(const NIF& other) const { return value_==other.value_; }
+    bool operator==(const NIF& other) const { return value_ == other.value_; }
     bool operator!=(const NIF& other) const { return !(*this == other); }
     operator long() const { return value_; }
+    // Falta getOriginal -> 25418965D
   private:
     int value_; // Representación numérica del DNI
 };
