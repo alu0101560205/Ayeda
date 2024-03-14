@@ -24,6 +24,7 @@ class StaticSequence : public Sequence<Key> {
         table_ = new Sequence<Key>*[tableSize_];
         for (size_t i = 0; i < tableSize_; i++) {
           table_[i] = new Container[blockSize_];
+          // table_[i] = nullptr;
         }
       }
     bool search(const Key& key) const override;
@@ -55,7 +56,13 @@ bool StaticSequence<Key>::search(const Key& key) const {
 */
 template <class Key>
 bool StaticSequence<Key>::insert(const Key& key) {
-  
+  int i = 0; 
+  while (this->table_[i] != nullptr && i < this->blockSize_ ) {
+    i++;
+  }
+  if (i == this->blockSize_) return false;
+  else this->table_[i] = key;
+  return true;
 }
 
 /**

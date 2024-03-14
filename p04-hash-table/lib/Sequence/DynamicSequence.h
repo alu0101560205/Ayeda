@@ -45,8 +45,8 @@ bool DynamicSequence<Key>::search (const Key& key) const {
 */
 template <class Key>
 bool DynamicSequence<Key>::insert(const Key& key) {
-  if (!search(key)) {
-    elements_.push_back(key);
+  if (!search(key)) { // Si el elemento no está en la lista
+    elements_.push_back(key); // Lo pusheamos al final
     return true;
   }
   return false;
