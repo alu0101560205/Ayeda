@@ -13,16 +13,18 @@
 #include "../lib/Dispersion/DispersionFunction.h"
 #include "../lib/Dispersion/ModuleDispersion.h"
 #include "../lib/Dispersion/SumDispersion.h"
+#include "../lib/Dispersion/PseudoRandomDispersion.h"
 #include "../lib/Exploration/ExplorationFunction.h"
 #include "../lib/Exploration/LinearExploration.h"
 #include "../lib/Exploration/QuadraticExploration.h"
 #include "../lib/Exploration/RehashingExploration.h"
+#include "../lib/Exploration/DoubleHashingExploration.h"
 #include "../lib//Sequence/Sequence.h"
 #include "../lib/Sequence/DynamicSequence.h"
 #include "../lib/Sequence/StaticSequence.h"
 #include "../lib//Tools/tools.h"
-#include "../lib//NIF/NIF.h"
 #include "../lib/HashTable/HashTable.h"
+#include <string>
 
 int main(int argc, char* argv[]) {
   /*
@@ -54,24 +56,15 @@ int main(int argc, char* argv[]) {
     }
   } 
   */
-  // std::cout << "Probando con secuencia estática:" << std::endl;
-  // HashTable.search(NIF(99999999)) ? "Encontrado" : "No encontrado") << std::endl;
-
-    // // Prueba con tabla hash y secuencia dinámica
-    // std::cout << "\nProbando con secuencia dinámica:" << std::endl;
-    // SumDispersion<NIF> dispFunc(100);
-    // HashTable<NIF, DynamicSequence<NIF>> dynamicHashTable(100, dispFunc);
-
-    // // Insertar elementos en la tabla dinámica
-    // dynamicHashTable.insert(NIF(12345678));
-    // dynamicHashTable.insert(NIF(87654321));
-    // dynamicHashTable.insert(NIF(55555555));
-
-    // // Buscar elementos en la tabla dinámica
-    // std::cout << "Buscando elemento '12345678': " << (dynamicHashTable.search(NIF(12345678)) ? "Encontrado" : "No encontrado") << std::endl;
-    // std::cout << "Buscando elemento '99999999': " << (dynamicHashTable.search(NIF(99999999)) ? "Encontrado" : "No encontrado") << std::endl;
-
-    return 0;
+  std::string dni;
+  ModuleDispersion<std::string> disp(100);
+  QuadraticExploration<std::string> expl;
+  HashTable<std::string, StaticSequence<std::string>> tabla(100, disp, expl, 3);
+  std::string input;
+  while (std::cin >> input) {
+    std::cout << tabla.insert(input) << std::endl;
+  }
+  return 0;
 }
 
 

@@ -13,6 +13,8 @@
 #define NIF_H
 #include <iostream>
 #include <cstdlib>
+#include <random>
+#include <string>
 
 class NIF {
   public:
@@ -20,7 +22,7 @@ class NIF {
     NIF(long int val) : value_(val) {} // Constructor
     bool operator==(const NIF& other) const { return value_ == other.value_; }
     bool operator!=(const NIF& other) const { return !(*this == other); }
-    operator long() const { return value_; }
+    // operator long() const { return value_; }
     // Falta getOriginal -> 25418965D
   private:
     int value_; // Representación numérica del DNI
