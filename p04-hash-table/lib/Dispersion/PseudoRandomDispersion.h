@@ -12,6 +12,7 @@
 #ifndef PSEUDORANDOMDISPERSION_H
 #define PSEUDORANDOMDISPERSION_H
 #include "DispersionFunction.h"
+#include <random>
 
 /**
  * @brief Función pseudoaleatoria
@@ -22,7 +23,7 @@ class PseudorandomDispersion : public DispersionFunction<Key> {
     PseudorandomDispersion(unsigned int size) : DispersionFunction<Key>(size) {}
     unsigned operator()(const Key& key) const override {
       srand(key);
-      return rand() % this->getTableSize();
+      return rand();
     }
 };
 

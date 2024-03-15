@@ -12,6 +12,7 @@
 #ifndef REHASHINGEXPLORATION_H
 #define REHASHINGEXPLORATION_H
 #include "ExplorationFunction.h"
+#include <random>
 
 /**
  * @brief Clase función de redispersión
@@ -19,16 +20,13 @@
 template <class Key>
 class RehashingExploration : public ExplorationFunction<Key> {
   public:
-    RehashingExploration(const DispersionFunction<Key>& f) : f_(f) {}
     unsigned operator()(const Key& key, unsigned i) const override {
-      unsigned hashValue = f_(key);
-      for (unsigned count = 0; count < i; count++) {
-        hashValue = f_(hashValue);
+      srand(key);
+      for (int j = 1; j < i; j++) {
+        rand();
       }
-      return hashValue;
+      return rand();
     }
-  private:
-    const DispersionFunction<Key>& f_; // Función de dispersión auxiliar f(k)
 };
 
 #endif

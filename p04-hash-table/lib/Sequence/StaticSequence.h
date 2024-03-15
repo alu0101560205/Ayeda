@@ -19,21 +19,17 @@
 template <class Key>
 class StaticSequence : public Sequence<Key> {
   public:
-    StaticSequence(size_t tSize, DispersionFunction<Key>& fd, ExplorationFunction<Key>& fe, size_t bSize) 
-      : tableSize_(tSize), fd_(fd), fe_(fe), blockSize_(bSize) {
-        table_ = new Sequence<Key>*[tableSize_];
-        for (size_t i = 0; i < tableSize_; i++) {
-          table_[i] = nullptr;
-        }
+    StaticSequence(size_t bSize) : blockSize_(bSize) {
+      table_ = new Key[blockSize_];
+      for (int i = 0; i < blockSize_; i++) {
+        table_[i] = nullptr;
       }
+    }
     bool search(const Key& key) const override;
     bool insert(const Key& key) override;
     bool isFull() const;
   private:
-    size_t tableSize_; // Tamaño de la tabla
-    Sequence<Key>** table_; // Array con tableSize posiciones, con punteros a objetos Sequence<Key>
-    DispersionFunction<Key>& fd_; // Función de dispersión
-    ExplorationFunction<Key>& fe_; // Función de exploración
+    Key* table_; // Array con tableSize posiciones, con punteros a objetos Sequence<Key>
     size_t blockSize_; // Tamaño del bloque
 };
 
@@ -42,7 +38,7 @@ class StaticSequence : public Sequence<Key> {
 */
 template <class Key>
 bool StaticSequence<Key>::search(const Key& key) const {
-  for (size_t i = 0; i < tableSize_; i++) {
+  for (size_t i = 0; i < blockSize_; i++) {
     if (table_[i] == key) {
       return true;
     }
@@ -69,12 +65,12 @@ bool StaticSequence<Key>::insert(const Key& key) {
 */
 template <class Key>
 bool StaticSequence<Key>::isFull() const {
-  for (size_t i = 0; i < tableSize_; i++) {
-    if (!table_[i]->isFull()) {
-      return false; // Si al menos una posición no está llena, la secuencia no lo está
+  for (size_t i = 0; i < blockSize_; i++) {
+    if (table_[i] == nullptr) {
+      return false;
     }
   }
-  return true; // Si todas las posiciones están llenas
+  return true;
 }
 
 #endif

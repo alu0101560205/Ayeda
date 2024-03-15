@@ -9,7 +9,7 @@
   * @date Mar 10 2024
   */
 
-#include "../lib/tools.h"
+#include "../lib//Tools/tools.h"
 
 void Usage() {
   std::cout << "Uso: ./hashTable -ts <s> -fd <f> -hash <open|close> -bs <s> -fe <f>\n";

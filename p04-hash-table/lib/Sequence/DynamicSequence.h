@@ -24,7 +24,7 @@ class DynamicSequence : public Sequence<Key> {
     bool search(const Key& key) const override;
     bool insert(const Key& key) override;
   private:
-    std::vector<Key> elements_; // Lista para almacenar los elementos en caso de colisión
+    std::list<Key> elements_; // Lista para almacenar los elementos en caso de colisión
 };
 
 /**
@@ -32,8 +32,8 @@ class DynamicSequence : public Sequence<Key> {
 */
 template<class Key>
 bool DynamicSequence<Key>::search (const Key& key) const {
-  for (const auto& k : elements_) {
-    if (k == key) {
+  for (auto i = elements_.begin(); i != elements_.end(); i++) {
+    if (*i == key) {
       return true;
     }
   }

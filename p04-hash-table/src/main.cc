@@ -16,6 +16,7 @@
 #include "../lib/Exploration/ExplorationFunction.h"
 #include "../lib/Exploration/LinearExploration.h"
 #include "../lib/Exploration/QuadraticExploration.h"
+#include "../lib/Exploration/RehashingExploration.h"
 #include "../lib//Sequence/Sequence.h"
 #include "../lib/Sequence/DynamicSequence.h"
 #include "../lib/Sequence/StaticSequence.h"
@@ -53,19 +54,8 @@ int main(int argc, char* argv[]) {
     }
   } 
   */
-  std::cout << "Probando con secuencia estática:" << std::endl;
-    ModuleDispersion<NIF> dispersionFunction(100);
-    LinearExploration<NIF> explorationFunction;
-    HashTable<NIF, StaticSequence<NIF>> staticHashTable(100, dispersionFunction, explorationFunction, 10);
-
-    // Insertar elementos en la tabla estática
-    staticHashTable.insert(NIF(12345678));
-    staticHashTable.insert(NIF(87654321));
-    staticHashTable.insert(NIF(55555555));
-
-    // Buscar elementos en la tabla estática
-    std::cout << "Buscando elemento '12345678': " << (staticHashTable.search(NIF(12345678)) ? "Encontrado" : "No encontrado") << std::endl;
-    std::cout << "Buscando elemento '99999999': " << (staticHashTable.search(NIF(99999999)) ? "Encontrado" : "No encontrado") << std::endl;
+  // std::cout << "Probando con secuencia estática:" << std::endl;
+  // HashTable.search(NIF(99999999)) ? "Encontrado" : "No encontrado") << std::endl;
 
     // // Prueba con tabla hash y secuencia dinámica
     // std::cout << "\nProbando con secuencia dinámica:" << std::endl;

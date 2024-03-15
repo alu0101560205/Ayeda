@@ -2,7 +2,7 @@
 SRC_DIR := src
 LIB_DIR := lib
 BUILD_DIR := build
-BIN_DIR := bin
+BIN_DIR := Exec
 
 # Compilador y opciones
 CXX := g++
@@ -17,7 +17,7 @@ SRCS := $(wildcard $(SRC_DIR)/*.cc)
 OBJS := $(patsubst $(SRC_DIR)/%.cc,$(BUILD_DIR)/%.o,$(SRCS))
 
 # Nombre del ejecutable
-TARGET := $(BIN_DIR)/programa
+TARGET := $(BIN_DIR)/hash
 
 # Reglas de construcción
 all: $(TARGET)
