@@ -20,8 +20,8 @@ template <class Key>
 class StaticSequence : public Sequence<Key> {
   public:
     StaticSequence(size_t bSize) : blockSize_(bSize) {
-      table_ = new Key[blockSize_];
-      for (int i = 0; i < blockSize_; i++) {
+      table_ = new Key*[blockSize_];
+      for (size_t i = 0; i < blockSize_; i++) {
         table_[i] = nullptr;
       }
     }
@@ -29,7 +29,7 @@ class StaticSequence : public Sequence<Key> {
     bool insert(const Key& key) override;
     bool isFull() const;
   private:
-    Key* table_; // Array con tableSize posiciones, con punteros a objetos Sequence<Key>
+    Key** table_; 
     size_t blockSize_; // Tamaño del bloque
 };
 
@@ -39,7 +39,7 @@ class StaticSequence : public Sequence<Key> {
 template <class Key>
 bool StaticSequence<Key>::search(const Key& key) const {
   for (size_t i = 0; i < blockSize_; i++) {
-    if (table_[i] == key) {
+    if (*table_[i] == key) {
       return true;
     }
   }
@@ -51,12 +51,12 @@ bool StaticSequence<Key>::search(const Key& key) const {
 */
 template <class Key>
 bool StaticSequence<Key>::insert(const Key& key) {
-  int i = 0; 
-  while (this->table_[i] != nullptr && i < this->blockSize_ ) {
+  size_t i = 0; 
+  while (table_[i] != nullptr && i < this->blockSize_ ) {
     i++;
   }
   if (i == this->blockSize_) return false;
-  else this->table_[i] = key;
+  else table_[i] = new Key(key);
   return true;
 }
 

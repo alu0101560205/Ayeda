@@ -23,7 +23,7 @@ class HashTable : public Sequence <Key> {
     HashTable (unsigned tsz, DispersionFunction<Key>& fd, ExplorationFunction<Key>& fe, unsigned bsz)
       : tableSize_(tsz), fd_(fd), fe_(fe), blockSize_(bsz) {
         hashTable_ = new Container*[tableSize_];
-        for (int i = 0; i < tableSize_; i++) {
+        for (size_t i = 0; i < tableSize_; i++) {
           hashTable_[i] = new Container{blockSize_};
         }
       }
@@ -43,7 +43,7 @@ class HashTable : public Sequence <Key> {
 template <class Key, class Container>
 bool HashTable<Key, Container>::insert(const Key& key) {
   int position{0};
-  for (int i = 0; i < tableSize_; i++) {
+  for (size_t i = 0; i < tableSize_; i++) {
     position += (fe_(key, i) + fd_(key));
     position = position % tableSize_;
     if (hashTable_[position]->insert(key) == true) {
@@ -59,7 +59,7 @@ bool HashTable<Key, Container>::insert(const Key& key) {
 template <class Key, class Container>
 bool HashTable<Key, Container>::search(const Key& key) const {
   int position{0};
-  for (int i = 0; i < tableSize_; i++) {
+  for (size_t i = 0; i < tableSize_; i++) {
     position += (fe_(key, i) + fd_(key));
     position = position % tableSize_;
     if (hashTable_[position]->search(key) == true) {

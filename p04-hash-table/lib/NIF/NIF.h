@@ -22,10 +22,17 @@ class NIF {
     NIF(long int val) : value_(val) {} // Constructor
     bool operator==(const NIF& other) const { return value_ == other.value_; }
     bool operator!=(const NIF& other) const { return !(*this == other); }
-    // operator long() const { return value_; }
+    operator long() const { return value_; }
     // Falta getOriginal -> 25418965D
+    int getValue() const { return value_; }
+    
   private:
     int value_; // Representación numérica del DNI
 };
+
+std::istream& operator>>(std::istream& input, const NIF& nif) {
+  input >> nif.getValue();
+  return input;
+}
 
 #endif

@@ -24,6 +24,7 @@
 #include "../lib/Sequence/StaticSequence.h"
 #include "../lib//Tools/tools.h"
 #include "../lib/HashTable/HashTable.h"
+#include "../lib/NIF/NIF.h"
 #include <string>
 
 int main(int argc, char* argv[]) {
@@ -56,15 +57,13 @@ int main(int argc, char* argv[]) {
     }
   } 
   */
-  std::string dni;
-  ModuleDispersion<std::string> disp(100);
-  QuadraticExploration<std::string> expl;
-  HashTable<std::string, StaticSequence<std::string>> tabla(100, disp, expl, 3);
-  std::string input;
+  NIF dni;
+  ModuleDispersion<NIF> disp(100);
+  QuadraticExploration<NIF> expl;
+  HashTable<NIF, StaticSequence<NIF>> tabla(100, disp, expl, 3);
+  NIF input;
   while (std::cin >> input) {
     std::cout << tabla.insert(input) << std::endl;
   }
   return 0;
 }
-
-

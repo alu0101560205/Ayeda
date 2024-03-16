@@ -22,11 +22,11 @@ void Usage() {
 
 Options ParseArguments(int argc, char* argv[]) {
   Options options;
-  bool hasTableSize = false;
-  bool hasDispersionFunction = false;
-  bool hasHashType = false;
-  bool hasBlockSize = false;
-  bool hasExplorationFunction = false;
+  // bool hasTableSize = false;
+  // bool hasDispersionFunction = false;
+  // bool hasHashType = false;
+  // bool hasBlockSize = false;
+  // bool hasExplorationFunction = false;
 
   if (argc < 4) {
     std::cerr << "Faltan argumentos obligatorios.\n";
@@ -39,7 +39,7 @@ Options ParseArguments(int argc, char* argv[]) {
     if (arg == "-ts") {
       if (i + 1 < argc) {
         options.tableSize = std::stoi(argv[i + 1]);
-        hasTableSize = true;
+        // hasTableSize = true;
         ++i;
       } else {
         throw std::invalid_argument("Falta el argumento para la opción -ts");
@@ -47,7 +47,7 @@ Options ParseArguments(int argc, char* argv[]) {
     } else if (arg == "-fd") {
       if (i + 1 < argc) {
         options.dispersionFunction = argv[i + 1];
-        hasDispersionFunction = true;
+        // hasDispersionFunction = true;
         ++i;
       } else {
         throw std::invalid_argument("Falta el argumento para la opción -fd");
@@ -55,7 +55,7 @@ Options ParseArguments(int argc, char* argv[]) {
     } else if(arg == "-hash") {
       if (i + 1 < argc) {
         options.hashType = argv[i + 1];
-        hasHashType = true;
+        // hasHashType = true;
         ++i;
       } else {
         throw std::invalid_argument("Falta el argumento para la opción -hash");
@@ -63,7 +63,7 @@ Options ParseArguments(int argc, char* argv[]) {
     } else if (arg == "-bs") {
       if (i + 1 < argc) {
         options.blockSize = std::stoi(argv[i + 1]);
-        hasBlockSize = true;
+        // hasBlockSize = true;
         ++i;
       } else {
         throw std::invalid_argument("Falta el argumento para la opción -bs");
@@ -71,7 +71,7 @@ Options ParseArguments(int argc, char* argv[]) {
     } else if (arg == "-fe") {
       if (i + 1 < argc) {
         options.explorationFunction = argv[i + 1];
-        hasExplorationFunction = true;
+        // hasExplorationFunction = true;
         ++i;
       } else {
         throw std::invalid_argument("Falta el argumento para la opción " + arg);
@@ -80,8 +80,8 @@ Options ParseArguments(int argc, char* argv[]) {
       throw std::invalid_argument("Opción desconocida");
     }
   }
-  if (!hasTableSize || !hasDispersionFunction || !hasHashType) {
-    throw std::invalid_argument("Faltan argumentos oobligatorios");
-  }
+  // if (!hasTableSize || !hasDispersionFunction || !hasHashType) {
+  //   throw std::invalid_argument("Faltan argumentos oobligatorios");
+  // }
   return options;
 }

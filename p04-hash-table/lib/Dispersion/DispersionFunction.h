@@ -24,7 +24,7 @@ class DispersionFunction {
     virtual unsigned operator()(const Key& key) const = 0;
     ~DispersionFunction() {}
     unsigned getTableSize() const { return tableSize_; }
-  protected:
+  private:
     unsigned tableSize_;
 };
 
