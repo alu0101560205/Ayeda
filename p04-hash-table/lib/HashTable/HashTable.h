@@ -29,6 +29,7 @@ class HashTable : public Sequence <Key> {
       }
     bool search(Key& key) const;
     bool insert(Key& key);
+    ~HashTable() {}
   private:
     size_t tableSize_;
     DispersionFunction<Key>& fd_;

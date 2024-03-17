@@ -2,7 +2,7 @@
 SRC_DIR := src
 LIB_DIR := lib
 BUILD_DIR := build
-BIN_DIR := Exec
+BIN_DIR := .
 
 # Compilador y opciones
 CXX := g++
@@ -29,10 +29,11 @@ $(BUILD_DIR)/%.o: $(SRC_DIR)/%.cc
 	$(CXX) $(CXXFLAGS) -c $< -o $@
 
 # Asegurarse de que los directorios necesarios existan
-$(shell mkdir -p $(BUILD_DIR) $(BIN_DIR))
+$(shell mkdir -p $(BUILD_DIR))
 
 # Limpiar archivos generados
 clean:
-	$(RM) $(BUILD_DIR) $(BIN_DIR)
+	$(RM) $(BUILD_DIR) $(TARGET)
 
 .PHONY: all clean
+
