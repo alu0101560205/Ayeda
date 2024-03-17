@@ -21,7 +21,7 @@ template <class Key>
 class DispersionFunction {
   public:
     DispersionFunction(unsigned int size) : tableSize_(size) {}
-    virtual unsigned operator()(const Key& key) const = 0;
+    virtual unsigned operator()(Key& key) const = 0;
     ~DispersionFunction() {}
     unsigned getTableSize() const { return tableSize_; }
   private:

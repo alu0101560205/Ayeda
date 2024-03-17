@@ -21,7 +21,7 @@
 template <class Key>
 class ExplorationFunction {
   public:
-    virtual unsigned operator()(const Key&, unsigned i) const = 0; // i es el intento de exploración
+    virtual unsigned operator()(Key&, unsigned i) const = 0; // i es el intento de exploración
     virtual ~ExplorationFunction() {}
 };
 

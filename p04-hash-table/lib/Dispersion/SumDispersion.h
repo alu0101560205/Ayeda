@@ -20,7 +20,7 @@ template <class Key>
 class SumDispersion : public DispersionFunction<Key> {
   public:
     SumDispersion(unsigned int size) : DispersionFunction<Key>(size) {}
-    unsigned operator()(const Key& key) const override {
+    unsigned operator()(Key& key) const override {
       unsigned sum{0};
       for (const auto& val : key) {
         sum += val;

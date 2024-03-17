@@ -20,7 +20,7 @@
 template <class Key>
 class RehashingExploration : public ExplorationFunction<Key> {
   public:
-    unsigned operator()(const Key& key, unsigned i) const override {
+    unsigned operator()(Key& key, unsigned i) const override {
       srand(key);
       for (int j = 1; j < i; j++) {
         rand();

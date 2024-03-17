@@ -20,7 +20,7 @@ template <class Key>
 class ModuleDispersion : public DispersionFunction<Key> {
   public:
     ModuleDispersion(unsigned int size) : DispersionFunction<Key>(size) {}
-    unsigned operator()(const Key& key) const override {
+    unsigned operator()(Key& key) const override {
       return (static_cast<long>(key) % this->getTableSize());
     }
 };

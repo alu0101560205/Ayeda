@@ -21,8 +21,8 @@ template <class Key>
 class DynamicSequence : public Sequence<Key> {
   public:
     DynamicSequence() {}
-    bool search(const Key& key) const override;
-    bool insert(const Key& key) override;
+    bool search(Key& key) const override;
+    bool insert(Key& key) override;
   private:
     std::list<Key> elements_; // Lista para almacenar los elementos en caso de colisión
 };
@@ -31,7 +31,7 @@ class DynamicSequence : public Sequence<Key> {
  * @brief Método para buscar un elemento en la tabla
 */
 template<class Key>
-bool DynamicSequence<Key>::search (const Key& key) const {
+bool DynamicSequence<Key>::search (Key& key) const {
   for (auto i = elements_.begin(); i != elements_.end(); i++) {
     if (*i == key) {
       return true;
@@ -44,7 +44,7 @@ bool DynamicSequence<Key>::search (const Key& key) const {
  * @brief Método para insertar un elemento en la tabla
 */
 template <class Key>
-bool DynamicSequence<Key>::insert(const Key& key) {
+bool DynamicSequence<Key>::insert(Key& key) {
   if (!search(key)) { // Si el elemento no está en la lista
     elements_.push_back(key); // Lo pusheamos al final
     return true;

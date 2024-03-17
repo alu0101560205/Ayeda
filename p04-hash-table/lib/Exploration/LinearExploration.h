@@ -19,7 +19,7 @@
 template <class Key>
 class LinearExploration : public ExplorationFunction<Key> {
   public:
-    unsigned operator()(const Key& key, unsigned i) const override {
+    unsigned operator()(Key& key, unsigned i) const override {
       return i;
     }
 };

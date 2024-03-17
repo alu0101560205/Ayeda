@@ -25,8 +25,8 @@ class StaticSequence : public Sequence<Key> {
         table_[i] = nullptr;
       }
     }
-    bool search(const Key& key) const override;
-    bool insert(const Key& key) override;
+    bool search(Key& key) const override;
+    bool insert(Key& key) override;
     bool isFull() const;
   private:
     Key** table_; 
@@ -37,7 +37,7 @@ class StaticSequence : public Sequence<Key> {
  *@brief Método para buscar un elemento en la tabla (estática) 
 */
 template <class Key>
-bool StaticSequence<Key>::search(const Key& key) const {
+bool StaticSequence<Key>::search(Key& key) const {
   for (size_t i = 0; i < blockSize_; i++) {
     if (*table_[i] == key) {
       return true;
@@ -50,7 +50,7 @@ bool StaticSequence<Key>::search(const Key& key) const {
  * @brief Método para insertar un elemento en la tabla (estática)
 */
 template <class Key>
-bool StaticSequence<Key>::insert(const Key& key) {
+bool StaticSequence<Key>::insert(Key& key) {
   size_t i = 0; 
   while (table_[i] != nullptr && i < this->blockSize_ ) {
     i++;

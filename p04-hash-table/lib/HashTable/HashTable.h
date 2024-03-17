@@ -27,8 +27,8 @@ class HashTable : public Sequence <Key> {
           hashTable_[i] = new Container{blockSize_};
         }
       }
-    bool search(const Key& key) const;
-    bool insert(const Key& key);
+    bool search(Key& key) const;
+    bool insert(Key& key);
   private:
     size_t tableSize_;
     DispersionFunction<Key>& fd_;
@@ -41,7 +41,7 @@ class HashTable : public Sequence <Key> {
  * @brief Función insert estática
 */
 template <class Key, class Container>
-bool HashTable<Key, Container>::insert(const Key& key) {
+bool HashTable<Key, Container>::insert(Key& key) {
   int position{0};
   for (size_t i = 0; i < tableSize_; i++) {
     position += (fe_(key, i) + fd_(key));
@@ -57,7 +57,7 @@ bool HashTable<Key, Container>::insert(const Key& key) {
  * @brief Función search estática
 */
 template <class Key, class Container>
-bool HashTable<Key, Container>::search(const Key& key) const {
+bool HashTable<Key, Container>::search(Key& key) const {
   int position{0};
   for (size_t i = 0; i < tableSize_; i++) {
     position += (fe_(key, i) + fd_(key));
@@ -75,8 +75,8 @@ class HashTable <Key, DynamicSequence<Key>> {
     HashTable (unsigned tsz, DispersionFunction<Key>& fd) : tableSize_(tsz), fd_(fd) { 
       hashTable_ = new DynamicSequence<Key>*[tableSize_];
     }
-    bool search(const Key& key) const;
-    bool insert(const Key& key);
+    bool search(Key& key) const;
+    bool insert(Key& key);
   private:
     DispersionFunction<Key> fd_;
     size_t tableSize_;
@@ -87,7 +87,7 @@ class HashTable <Key, DynamicSequence<Key>> {
  * @brief Función insert dinámica
 */
 template <class Key>
-bool HashTable<Key, DynamicSequence<Key>>::insert(const Key& key) {
+bool HashTable<Key, DynamicSequence<Key>>::insert(Key& key) {
   unsigned int position{0};
   position = fd_(key);
   position = position % tableSize_;
@@ -101,7 +101,7 @@ bool HashTable<Key, DynamicSequence<Key>>::insert(const Key& key) {
  * @brief Función search dinámica
 */
 template <class Key>
-bool HashTable<Key, DynamicSequence<Key>>::search(const Key& key) const {
+bool HashTable<Key, DynamicSequence<Key>>::search(Key& key) const {
   unsigned int position{0};
   position = fd_(key);
   position = position % tableSize_;

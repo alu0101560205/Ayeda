@@ -20,7 +20,7 @@ template <class Key>
 class DoubleHashingExploration : public ExplorationFunction<Key> {
   public:
     DoubleHashingExploration(const DispersionFunction<Key>& f) : f_(f) {}
-    unsigned operator()(const Key& key, unsigned i) const override {
+    unsigned operator()(Key& key, unsigned i) const override {
       return (f_(key) * i);
     }
   private:

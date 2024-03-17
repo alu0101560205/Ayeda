@@ -21,8 +21,8 @@
 template <class Key>
 class Sequence {
   public:
-    virtual bool search(const Key& key) const = 0;
-    virtual bool insert(const Key& key) = 0;
+    virtual bool search(Key& key) const = 0;
+    virtual bool insert(Key& key) = 0;
     virtual ~Sequence() {}
 };
 
