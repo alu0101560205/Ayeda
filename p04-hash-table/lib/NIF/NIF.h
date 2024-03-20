@@ -18,21 +18,24 @@
 
 class NIF {
   public:
-    NIF() : value_(rand() % 100000000) {} // Constructor por defecto que inicializa un dni aleatorio
-    NIF(long int val) : value_(val) {} // Constructor
+    NIF() : value_(std::to_string(rand() % 100000000)) {} // Constructor por defecto que inicializa un dni aleatorio
+    NIF(std::string val) : value_(val) {} // Constructor
     bool operator==(const NIF& other) const { return value_ == other.value_; }
     bool operator!=(const NIF& other) const { return !(*this == other); }
-    operator long() const { return value_; }
+    operator long() const { return std::stoi(value_); }
     // Falta getOriginal -> 25418965D
-    int getValue() const { return value_; }
-    
+    std::string getValue() const { return value_; }
+    friend std::istream& operator>>(std::istream& input, NIF& nif) {
+      std::string dni;
+      input >> dni;
+      nif.value_ = std::stoi(dni.substr(0, dni.size() - 1));
+      return input;
+    }
+    std::string::const_iterator begin() const {return value_.begin(); }
+    std::string::const_iterator end() const { return value_.end(); }
   private:
-    int value_; // Representación numérica del DNI
+    std::string value_; // Representación numérica del DNI
 };
 
-std::istream& operator>>(std::istream& input, const NIF& nif) {
-  input >> nif.getValue();
-  return input;
-}
 
 #endif

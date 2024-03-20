@@ -28,39 +28,39 @@
 #include <string>
 
 int main(int argc, char* argv[]) {
-  /*
+  NIF dni;
   Options options = ParseArguments(argc, argv);
   // Creamos el objeto de la función de dispersión
-  DispersionFunction<Key>* dispersionFunction = nullptr;
+  DispersionFunction<NIF>* dispersionFunction = nullptr;
   if (options.dispersionFunction == "mod") {
-    dispersionFunction = new ModuleDispersion<Key>(options.tableSize);
+    dispersionFunction = new ModuleDispersion<NIF>(options.tableSize);
   } else if (options.dispersionFunction == "sum") {
-    dispersionFunction = new SumDispersion<Key>(options.tableSize);
+    dispersionFunction = new SumDispersion<NIF>(options.tableSize);
   } else if (options.dispersionFunction == "random") {
-    dispersionFunction = new PseudorandomDispersion<Key>(options.tableSize);
+    dispersionFunction = new PseudorandomDispersion<NIF>(options.tableSize);
   } else {
     throw std::invalid_argument("Función de dispersión desconocida");
   }
   // Creamos el objeto de la función de exploración (opcional)
-  ExplorationFunction<Key>* explorationFunction = nullptr;
+  ExplorationFunction<NIF>* explorationFunction = nullptr;
   if (!options.explorationFunction.empty()) {
-    if (options.explorationFunction == "linear") {
-      explorationFunction = new LinearExploration<Key>();
+    if (options.explorationFunction == "lineal") {
+      explorationFunction = new LinearExploration<NIF>();
     } else if (options.explorationFunction == "quadratic") {
-      explorationFunction = new QuadraticExploration<Key>();
+      explorationFunction = new QuadraticExploration<NIF>();
     } else if (options.explorationFunction == "doubleHashing") {
-      explorationFunction = new DoubleHashingExploration<Key>(dispersionFunction);
+      explorationFunction = new DoubleHashingExploration<NIF>(*dispersionFunction);
     } else if (options.explorationFunction == "rehashing") {
-      explorationFunction = new RehashingExploration<Key>();
+      explorationFunction = new RehashingExploration<NIF>();
     } else {
       throw std::invalid_argument("Función de exploración desconocida");
     }
   } 
-  */
-  NIF dni;
-  ModuleDispersion<NIF> disp(100);
-  QuadraticExploration<NIF> expl;
-  HashTable<NIF, StaticSequence<NIF>> tabla(100, disp, expl, 3);
+  
+  
+  // ModuleDispersion<NIF> disp(100);
+  // QuadraticExploration<NIF> expl;
+  HashTable<NIF, StaticSequence<NIF>> tabla(options.tableSize, *dispersionFunction, *explorationFunction, options.blockSize);
   NIF input;
   while (std::cin >> input) {
     std::cout << tabla.insert(input) << std::endl;

@@ -24,7 +24,7 @@ class DoubleHashingExploration : public ExplorationFunction<Key> {
       return (f_(key) * i);
     }
   private:
-    DispersionFunction<Key> f_; // Función de dispersión auxiliar f(k)
+    const DispersionFunction<Key>& f_; // Función de dispersión auxiliar f(k)
 };
 
 #endif

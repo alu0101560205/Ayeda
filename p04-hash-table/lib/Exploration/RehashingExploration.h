@@ -22,7 +22,7 @@ class RehashingExploration : public ExplorationFunction<Key> {
   public:
     unsigned operator()(Key& key, unsigned i) const override {
       srand(key);
-      for (int j = 1; j < i; j++) {
+      for (unsigned j = 1; j < i; j++) {
         rand();
       }
       return rand();
