@@ -66,10 +66,11 @@ int main(int argc, char* argv[]) {
   // QuadraticExploration<NIF> expl;
   HashTable<TarjetaRed, StaticSequence<TarjetaRed>> tabla(options.tableSize, *dispersionFunction, *explorationFunction, options.blockSize);
   // NIF input;
-  // while (std::cin >> tarjeta) {
-    tabla.insert(tarjeta); // Modificación
-    tabla.insert(tarjeta2); // Modificación
-    tabla.insert(tarjeta3); // Modificación
+  // while (std::cin >> input) {
+    // tabla.insert(input);
   //}
+  tabla.insert(tarjeta); // Modificación
+  tabla.insert(tarjeta2); // Modificación
+  tabla.insert(tarjeta3); // Modificación
   return 0;
 }

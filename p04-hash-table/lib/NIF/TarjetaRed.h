@@ -23,6 +23,8 @@ class TarjetaRed {
       long total = std::stoi(direccion_mac_) + velocidad_ + std::stoi(marca_) + hv_ + std::stoi(modelo_) + salidas_;
       return total;
     }
+    std::string::const_iterator begin() const {return direccion_mac_.begin(); }
+    std::string::const_iterator end() const { return direccion_mac_.end(); }
   private: 
     std::string direccion_mac_;
     int velocidad_;
