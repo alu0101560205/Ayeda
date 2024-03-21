@@ -48,6 +48,7 @@ bool HashTable<Key, Container>::insert(Key& key) {
     position += (fe_(key, i) + fd_(key));
     position = position % tableSize_;
     if (hashTable_[position]->insert(key) == true) {
+      std::cout << position << std::endl;
       return true;
     }
   }
