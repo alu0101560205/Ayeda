@@ -11,10 +11,11 @@
 
 #ifndef TARJETA_H
 #define TARJETA_H
-#include "NIF.h"
+#include <iostream>
+#include <string>
 
 // Modificación
-class TarjetaRed : public NIF {
+class TarjetaRed {
   public:
     TarjetaRed (std::string mac, int vel, std::string marca, bool hv, std::string model, int salida) 
       : direccion_mac_(mac), velocidad_(vel), marca_(marca), hv_(hv), modelo_(model), salidas_(salida) {}
