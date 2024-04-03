@@ -14,7 +14,15 @@
 
 int main() {
   StaticSequence<int> sequence(10);
-  int element = sequence[3];
-  std::cout << element << std::endl;
+  Position pos1 = 2;
+  sequence.insert(pos1);
+  Position pos2 = 4;
+  sequence.insert(pos2);
+  Position pos3 = 8;
+  sequence.insert(pos3);
+  int element = sequence[0];
+  int element2 = sequence[1];
+  int element3 = sequence[2];
+  std::cout << element << " " << element2 << " " << element3 << std::endl;
   return 0;
 }

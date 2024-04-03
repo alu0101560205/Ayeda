@@ -12,7 +12,6 @@
 #ifndef STATICSEQUENCE_h
 #define STATICSEQUENCE_h
 #include "Sequence.h"
-typedef int Position; 
 
 /**
  * @brief Clase para implementar la técnica de dispersión cerrada
@@ -29,14 +28,17 @@ class StaticSequence : public Sequence<Key> {
     bool search(Key& key) const override;
     bool insert(Key& key) override;
     bool isFull() const;
-    Key operator[](const Position& pos) const override {
+    Key operator[](size_t pos) const override {
       if (pos < 0 || pos >= blockSize_) {
         throw std::out_of_range("Índice fuera de los límites de la secuencia");
+      }
+      if (table_[pos] == nullptr) {
+        throw std::invalid_argument("El elemento en la posición especificada es nulo");
       }
       return *table_[pos];
     }
   private:
-    Key** table_; 
+    Key** table_;
     size_t blockSize_; // Tamaño del bloque
 };
 

@@ -14,6 +14,7 @@
 #include <iostream>
 #include <array>
 #include <vector>
+typedef int Position; 
 
 /**
  * @brief Clase Sequence
@@ -23,7 +24,7 @@ class Sequence {
   public:
     virtual bool search(Key& key) const = 0;
     virtual bool insert(Key& key) = 0;
-    virtual Key operator[](const Position& pos) const = 0;
+    virtual Key operator[](size_t pos) const = 0;
     virtual ~Sequence() {}
 };
 
