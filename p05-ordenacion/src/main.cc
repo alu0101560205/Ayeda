@@ -11,6 +11,8 @@
 
 #include "../lib/Sequence/Sequence.h"
 #include "../lib/Sequence/StaticSequence.h"
+#include "../lib/SortMethod/SortMethod.h"
+#include "../lib/SortMethod/SelectionMethod.h"
 
 int main() {
   StaticSequence<int> sequence(10);
@@ -24,5 +26,6 @@ int main() {
   int element2 = sequence[1];
   int element3 = sequence[2];
   std::cout << element << " " << element2 << " " << element3 << std::endl;
+  SortMethod<int>* selection = new SelectionMethod<int>(sequence, 10);
   return 0;
 }

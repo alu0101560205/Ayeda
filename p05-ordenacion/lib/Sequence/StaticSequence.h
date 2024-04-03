@@ -37,6 +37,7 @@ class StaticSequence : public Sequence<Key> {
       }
       return *table_[pos];
     }
+    size_t getBlockSize() const { return blockSize_; }
   private:
     Key** table_;
     size_t blockSize_; // Tamaño del bloque
