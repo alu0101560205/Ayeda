@@ -15,17 +15,16 @@
 #include "../lib/SortMethod/SelectionMethod.h"
 
 int main() {
-  StaticSequence<int> sequence(10);
-  Position pos1 = 2;
+  StaticSequence<int> sequence(5);
+  Position pos1 = 2, pos2 = 4, pos3 = 8, pos4 = 1, pos5 = 7;
   sequence.insert(pos1);
-  Position pos2 = 4;
   sequence.insert(pos2);
-  Position pos3 = 8;
   sequence.insert(pos3);
-  int element = sequence[0];
-  int element2 = sequence[1];
-  int element3 = sequence[2];
-  std::cout << element << " " << element2 << " " << element3 << std::endl;
-  SortMethod<int>* selection = new SelectionMethod<int>(sequence, 10);
+  sequence.insert(pos4);
+  sequence.insert(pos5);
+  sequence.printSequence();
+  SortMethod<int>* selection = new SelectionMethod<int>(sequence, 5);
+  selection->Sort();
+  sequence.printSequence();
   return 0;
 }

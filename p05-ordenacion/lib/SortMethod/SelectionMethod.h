@@ -25,17 +25,16 @@ class SelectionMethod : public SortMethod<Key> {
 template <class Key>
 void SelectionMethod<Key>::Sort() const {
   Key aux, min;
-  for (int i = 0; i < sequence_.getBlockSize(); i++) {
-    std::cout << "He entrado en el for\n";
+  for (size_t i = 0; i < this->sequence_.getBlockSize(); i++) {
     min = i;
-    for (int j = i + 1; j < sequence_.getBlockSize(); j++) {
-      if (sequence_[j] < sequence_[min]) {
+    for (size_t j = i + 1; j < this->sequence_.getBlockSize(); j++) {
+      if (this->sequence_[j] < this->sequence_[min]) {
         min = j;
       }
     }
-    aux = sequence_[i];
-    sequence_[i] = sequence_[min];
-    sequence_[min] = aux;
+    aux = this->sequence_[i];
+    this->sequence_[i] = this->sequence_[min];
+    this->sequence_[min] = aux;
   }
 }
 

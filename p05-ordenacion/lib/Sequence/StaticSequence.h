@@ -28,7 +28,7 @@ class StaticSequence : public Sequence<Key> {
     bool search(Key& key) const override;
     bool insert(Key& key) override;
     bool isFull() const;
-    Key operator[](size_t pos) const override {
+    Key& operator[](size_t pos) const override {
       if (pos < 0 || pos >= blockSize_) {
         throw std::out_of_range("Índice fuera de los límites de la secuencia");
       }
@@ -38,6 +38,7 @@ class StaticSequence : public Sequence<Key> {
       return *table_[pos];
     }
     size_t getBlockSize() const { return blockSize_; }
+    void printSequence();
   private:
     Key** table_;
     size_t blockSize_; // Tamaño del bloque
@@ -86,12 +87,12 @@ bool StaticSequence<Key>::isFull() const {
 /**
  * @brief Sobrecarga del operador de acceso
 */
-// template <class Key>
-// Key StaticSequence<Key>::operator[](const Position& pos) const {
-//   if (pos < 0 || pos >= blockSize_) {
-//     throw std::out_of_range("Índice fuera de los límites de la secuencia");
-//   }
-//   return *table_[pos];
-// }
+template <class Key>
+void StaticSequence<Key>::printSequence() {
+  for (size_t i = 0; i < getBlockSize(); i++) {
+    std::cout << *table_[i] << " ";
+  }
+  std::cout << std::endl;
+}
 
 #endif

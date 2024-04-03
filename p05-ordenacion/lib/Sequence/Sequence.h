@@ -24,8 +24,8 @@ class Sequence {
   public:
     virtual bool search(Key& key) const = 0;
     virtual bool insert(Key& key) = 0;
-    virtual Key operator[](size_t pos) const = 0;
-    virtual ~Sequence() {}
+    virtual Key& operator[](size_t pos) const = 0;
+    virtual void printSequence() = 0;
 };
 
 #endif
