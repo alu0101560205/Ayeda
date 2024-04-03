@@ -21,6 +21,9 @@ class SortMethod {
     SortMethod (StaticSequence<Key> sequence, size_t size) : sequence_(sequence), sequenceSize_(size) {}
     virtual void Sort() const = 0; 
     virtual ~SortMethod() {}
+  protected:
+    StaticSequence<Key> sequence_;
+    size_t sequenceSize_;
 };
 
 #endif
