@@ -4,7 +4,7 @@
   * Grado en Ingeniería Informática
   * Algoritmos y Estructuras de Datos Avanzada
   *
-  * @file StaticSequence.h
+  * @file main.cc
   * @author Estela Fernández Trujillo alu0101560205@ull.edu.es
   * @date April 02 2024
   */
@@ -14,6 +14,7 @@
 #include "../lib/SortMethod/SortMethod.h"
 #include "../lib/SortMethod/SelectionMethod.h"
 #include "../lib/SortMethod/QuickSort.h"
+#include "../lib/SortMethod/HeapSort.h"
 
 int main() {
   StaticSequence<int> sequence(5);
@@ -32,6 +33,10 @@ int main() {
   SortMethod<int>* selection2 = new QuickSort<int>(sequence, 5);
   selection2->Sort();
   std::cout << "Ordenación por QuickSort: ";
+  sequence.printSequence();
+  SortMethod<int>* selection3 = new HeapSort<int>(sequence, 5);
+  selection3->Sort();
+  std::cout << "Ordenación por HeapSort: ";
   sequence.printSequence();
   return 0;
 }
