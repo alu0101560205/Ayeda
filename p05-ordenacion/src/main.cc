@@ -13,6 +13,7 @@
 #include "../lib/Sequence/StaticSequence.h"
 #include "../lib/SortMethod/SortMethod.h"
 #include "../lib/SortMethod/SelectionMethod.h"
+#include "../lib/SortMethod/QuickSort.h"
 
 int main() {
   StaticSequence<int> sequence(5);
@@ -22,9 +23,15 @@ int main() {
   sequence.insert(pos3);
   sequence.insert(pos4);
   sequence.insert(pos5);
+  std::cout << "Sequencia original: ";
   sequence.printSequence();
   SortMethod<int>* selection = new SelectionMethod<int>(sequence, 5);
   selection->Sort();
+  std::cout << "Ordenación por seleccion: ";
+  sequence.printSequence();
+  SortMethod<int>* selection2 = new QuickSort<int>(sequence, 5);
+  selection2->Sort();
+  std::cout << "Ordenación por QuickSort: ";
   sequence.printSequence();
   return 0;
 }

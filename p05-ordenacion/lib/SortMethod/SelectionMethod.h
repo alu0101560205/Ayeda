@@ -22,6 +22,9 @@ class SelectionMethod : public SortMethod<Key> {
     void Sort() const override;
 };
 
+/**
+ * @brief Método ordenación por selección
+*/
 template <class Key>
 void SelectionMethod<Key>::Sort() const {
   Key aux, min;
