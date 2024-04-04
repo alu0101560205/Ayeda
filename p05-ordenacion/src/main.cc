@@ -15,6 +15,7 @@
 #include "../lib/SortMethod/SelectionMethod.h"
 #include "../lib/SortMethod/QuickSort.h"
 #include "../lib/SortMethod/HeapSort.h"
+#include "../lib/SortMethod/ShellSort.h"
 
 int main() {
   StaticSequence<int> sequence(5);
@@ -36,6 +37,10 @@ int main() {
   sequence.printSequence();
   SortMethod<int>* selection3 = new HeapSort<int>(sequence, 5);
   selection3->Sort();
+  std::cout << "Ordenación por HeapSort: ";
+  sequence.printSequence();
+  SortMethod<int>* shell = new ShellSort<int>(sequence, 5);
+  shell->Sort();
   std::cout << "Ordenación por HeapSort: ";
   sequence.printSequence();
   return 0;
