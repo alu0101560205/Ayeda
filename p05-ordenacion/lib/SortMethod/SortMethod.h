@@ -11,9 +11,7 @@
 
 #ifndef SORTMETHOD_H
 #define SORTMETHOD_H
-#include <iostream>
 #include "../Sequence/StaticSequence.h"
-#include "../Sequence/Sequence.h"
 
 template <class Key>
 class SortMethod {
