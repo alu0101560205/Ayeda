@@ -39,12 +39,11 @@ void QuickSort<Key>::Sort() const {
 */
 template <class Key>
 void QuickSort<Key>::Qsort(int ini, int fin) const {
-  if (ini < fin) {
-    Key i{ini}, f{fin};
-    Key pivote = (i + f) / 2; // Punto de pivote
+  int i{ini}, f{fin};
+  Key pivote = this->sequence_[(i + f) / 2]; // Punto de pivote
     while (i <= f) {
-      while (this->sequence_[i] < this->sequence_[pivote]) i++;
-      while (this->sequence_[f] > this->sequence_[pivote]) f--;
+      while (this->sequence_[i] < pivote) i++;
+      while (this->sequence_[f] > pivote) f--;
       if (i <= f) {
         std::swap(this->sequence_[i], this->sequence_[f]);
         i++;
@@ -53,7 +52,6 @@ void QuickSort<Key>::Qsort(int ini, int fin) const {
     }
     if (ini < f) Qsort(ini, f);
     if (i < fin) Qsort(i, fin);
-  }
 }
 
 #endif
