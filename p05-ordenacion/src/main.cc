@@ -16,15 +16,18 @@
 #include "../lib/SortMethod/QuickSort.h"
 #include "../lib/SortMethod/HeapSort.h"
 #include "../lib/SortMethod/ShellSort.h"
+#include "../lib/Tools/tools.h"
 
-int main() {
-  StaticSequence<int> sequence(5);
-  Position pos1 = 2, pos2 = 4, pos3 = 8, pos4 = 1, pos5 = 7;
-  sequence.insert(pos1);
-  sequence.insert(pos2);
-  sequence.insert(pos3);
-  sequence.insert(pos4);
-  sequence.insert(pos5);
+int main(int argc, char* argv[]) {
+  Arguments options = ParseArguments(argc, argv);
+  // StaticSequence<int> sequence(5);
+  // Position pos1 = 2, pos2 = 4, pos3 = 8, pos4 = 1, pos5 = 7;
+  // sequence.insert(pos1);
+  // sequence.insert(pos2);
+  // sequence.insert(pos3);
+  // sequence.insert(pos4);
+  // sequence.insert(pos5);
+  StaticSequence<int> sequence = MakeSequence<int>(options);
   std::cout << "Sequencia original: ";
   sequence.printSequence();
   SortMethod<int>* selection = new SelectionMethod<int>(sequence, 5);

@@ -21,7 +21,7 @@ class QuickSort : public SortMethod<Key> {
     QuickSort(StaticSequence<Key>& sequence, size_t size) : SortMethod<Key>(sequence, size) {}
     void Sort() const override;
   private:
-    void Qsort(Key ini, Key fin) const;
+    void Qsort(int ini, int fin) const;
 };
 
 /**
@@ -29,8 +29,8 @@ class QuickSort : public SortMethod<Key> {
 */
 template <class Key>
 void QuickSort<Key>::Sort() const {
-  Key ini = 0; // Indice inicial
-  Key fin = this->sequence_.getBlockSize() - 1; // Índice final
+  int ini = 0; // Indice inicial
+  int fin = int(this->sequenceSize_ - 1); // Índice final
   Qsort(ini, fin);
 }
 
@@ -38,7 +38,7 @@ void QuickSort<Key>::Sort() const {
  * @brief Método de ordenación
 */
 template <class Key>
-void QuickSort<Key>::Qsort(Key ini, Key fin) const {
+void QuickSort<Key>::Qsort(int ini, int fin) const {
   if (ini < fin) {
     Key i{ini}, f{fin};
     Key pivote = (i + f) / 2; // Punto de pivote
