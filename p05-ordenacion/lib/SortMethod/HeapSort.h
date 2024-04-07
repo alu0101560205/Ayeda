@@ -18,7 +18,7 @@
 template <class Key>
 class HeapSort : public SortMethod<Key> {
   public:
-    HeapSort(StaticSequence<Key> sequence, size_t size) : SortMethod<Key>(sequence,size) {}
+    HeapSort(StaticSequence<Key> sequence, size_t size, bool trace) : SortMethod<Key>(sequence, size, trace) {}
     void Sort() const override;
   private:
     void Baja(int i, int n) const;
@@ -50,12 +50,18 @@ void HeapSort<Key>::Baja(int i, int n) const {
 template <class Key>
 void HeapSort<Key>::Sort() const {
   int n = this->sequence_.getBlockSize();
+  int counter{0};
   for (int i = n - 1; i >= 0; i--) {
     Baja(i, n);
   }
   for (int i = n - 1; i >= 0; i--) {
     std::swap(this->sequence_[0], this->sequence_[i]);
     Baja(0, i);
+    if (this->trace_) {
+      std::cout << "Iteración " << counter << " : ";
+      this->sequence_.printSequence();
+      counter++; 
+    }
   }
 }
 

@@ -16,11 +16,12 @@
 template <class Key>
 class SortMethod {
   public:
-    SortMethod (StaticSequence<Key>& sequence, size_t size) : sequence_(sequence), sequenceSize_(size) {}
+    SortMethod (StaticSequence<Key>& sequence, size_t size, bool trace) : sequence_(sequence), sequenceSize_(size), trace_(trace) {}
     virtual void Sort() const = 0; 
   protected:
     StaticSequence<Key>& sequence_;
     size_t sequenceSize_;
+    bool trace_;
 };
 
 #endif

@@ -48,8 +48,12 @@ Arguments ParseArguments(int argc, char* argv[]) {
       arguments.start = argv[i + 1];
       ++i;
     } else if (arg == "-trace") {
-      if (argv[i + 1] == "y") arguments.trace == true;
-      if (argv[i + 1] == "n") arguments.trace == false;
+      if (argv[i + 1] == "y") {
+        arguments.trace = true;
+      }
+      if (argv[i + 1] == "n") {
+        arguments.trace = false;
+      }
     }
   }
   return arguments;

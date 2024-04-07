@@ -18,7 +18,7 @@
 template <class Key>
 class RadixSort : public SortMethod<Key> {
   public:
-    RadixSort(StaticSequence<Key> sequence, size_t size) : SortMethod<Key>(sequence, size) {}
+    RadixSort(StaticSequence<Key> sequence, size_t size, bool trace) : SortMethod<Key>(sequence, size, trace) {}
     void Sort() const override;
   private:
     void Rsort() const;
@@ -56,6 +56,7 @@ void RadixSort<Key>::Rsort() const {
   }
   // Creamos el auxiliar para almacenar los números en cada dígito
   std::vector<std::vector<Key>> buckets(10);
+  int counter{0};
   // Realizar el Radix sort
   for (int d = 1; d <= digits; ++d) {
     // Distribuir los números en los buckets
@@ -70,6 +71,11 @@ void RadixSort<Key>::Rsort() const {
         this->sequence_.insert(*it);
       }
       buckets[i].clear();
+    }
+    if (this->trace_) {
+      std::cout << "Iteración " << counter << " : ";
+      this->sequence_.printSequence();
+      counter++; 
     }
   }
 }

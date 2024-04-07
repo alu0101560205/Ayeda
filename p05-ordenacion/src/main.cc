@@ -24,28 +24,33 @@ int main(int argc, char* argv[]) {
   StaticSequence<int> sequence = MakeSequence<int>(options);
   std::cout << "Sequencia original: ";
   sequence.printSequence();
+  if (options.trace == true) {
+    std::cout << "La traza del algoritmo de ordenación se mostrará" << std::endl << std::endl;
+  } else {
+    std::cout << "La traza del algoritmo no se mostrará\n";
+  }
   if (options.typeSort == "select") {
-    SortMethod<int>* selection = new SelectionMethod<int>(sequence, options.sizeOfSequence);
+    SortMethod<int>* selection = new SelectionMethod<int>(sequence, options.sizeOfSequence, options.trace);
     selection->Sort();
     std::cout << "Ordenación por seleccion: ";
     sequence.printSequence();
   } else if (options.typeSort == "quick") {
-    SortMethod<int>* selection2 = new QuickSort<int>(sequence, options.sizeOfSequence);
+    SortMethod<int>* selection2 = new QuickSort<int>(sequence, options.sizeOfSequence, options.trace);
     selection2->Sort();
     std::cout << "Ordenación por QuickSort: ";
     sequence.printSequence();
   } else if (options.typeSort == "heap") {
-    SortMethod<int>* selection3 = new HeapSort<int>(sequence, options.sizeOfSequence);
+    SortMethod<int>* selection3 = new HeapSort<int>(sequence, options.sizeOfSequence, options.trace);
     selection3->Sort();
     std::cout << "Ordenación por HeapSort: ";
     sequence.printSequence();
   } else if (options.typeSort == "shell") {
-    SortMethod<int>* shell = new ShellSort<int>(sequence, options.sizeOfSequence);
+    SortMethod<int>* shell = new ShellSort<int>(sequence, options.sizeOfSequence, options.trace);
     shell->Sort();
     std::cout << "Ordenación por ShellSort: ";
     sequence.printSequence();
   } else if (options.typeSort == "radix") {
-    SortMethod<int>* radix = new RadixSort<int>(sequence, options.sizeOfSequence);
+    SortMethod<int>* radix = new RadixSort<int>(sequence, options.sizeOfSequence, options.trace);
     radix->Sort();
     std::cout << "Ordenación por RadixSort: ";
     sequence.printSequence();

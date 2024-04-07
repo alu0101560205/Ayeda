@@ -18,7 +18,7 @@
 template <class Key>
 class SelectionMethod : public SortMethod<Key> {
   public:
-    SelectionMethod(StaticSequence<Key>& sequence, size_t size) : SortMethod<Key>(sequence, size) {}
+    SelectionMethod(StaticSequence<Key>& sequence, size_t size, bool trace) : SortMethod<Key>(sequence, size, trace) {}
     void Sort() const override;
 };
 
@@ -28,6 +28,7 @@ class SelectionMethod : public SortMethod<Key> {
 template <class Key>
 void SelectionMethod<Key>::Sort() const {
   Key aux, min;
+  int counter{0};
   for (size_t i = 0; i < this->sequence_.getBlockSize(); i++) {
     min = i;
     for (size_t j = i + 1; j < this->sequence_.getBlockSize(); j++) {
@@ -38,6 +39,11 @@ void SelectionMethod<Key>::Sort() const {
     aux = this->sequence_[i];
     this->sequence_[i] = this->sequence_[min];
     this->sequence_[min] = aux;
+  }
+  if (this->trace_) {
+    std::cout << "Iteración " << counter << " : ";
+    this->sequence_.printSequence();
+    counter++; 
   }
 }
 
