@@ -24,25 +24,31 @@ int main(int argc, char* argv[]) {
   StaticSequence<int> sequence = MakeSequence<int>(options);
   std::cout << "Sequencia original: ";
   sequence.printSequence();
-  // SortMethod<int>* selection = new SelectionMethod<int>(sequence, options.sizeOfSequence);
-  // selection->Sort();
-  // std::cout << "Ordenación por seleccion: ";
-  // sequence.printSequence();
-  // SortMethod<int>* selection2 = new QuickSort<int>(sequence, options.sizeOfSequence);
-  // selection2->Sort();
-  // std::cout << "Ordenación por QuickSort: ";
-  // sequence.printSequence();
-  // SortMethod<int>* selection3 = new HeapSort<int>(sequence, options.sizeOfSequence);
-  // selection3->Sort();
-  // std::cout << "Ordenación por HeapSort: ";
-  // sequence.printSequence();
-  // SortMethod<int>* shell = new ShellSort<int>(sequence, options.sizeOfSequence);
-  // shell->Sort();
-  // std::cout << "Ordenación por ShellSort: ";
-  // sequence.printSequence();
-  SortMethod<int>* radix = new RadixSort<int>(sequence, options.sizeOfSequence);
-  radix->Sort();
-  std::cout << "Ordenación por RadixSort: ";
-  sequence.printSequence();
+  if (options.typeSort == "select") {
+    SortMethod<int>* selection = new SelectionMethod<int>(sequence, options.sizeOfSequence);
+    selection->Sort();
+    std::cout << "Ordenación por seleccion: ";
+    sequence.printSequence();
+  } else if (options.typeSort == "quick") {
+    SortMethod<int>* selection2 = new QuickSort<int>(sequence, options.sizeOfSequence);
+    selection2->Sort();
+    std::cout << "Ordenación por QuickSort: ";
+    sequence.printSequence();
+  } else if (options.typeSort == "heap") {
+    SortMethod<int>* selection3 = new HeapSort<int>(sequence, options.sizeOfSequence);
+    selection3->Sort();
+    std::cout << "Ordenación por HeapSort: ";
+    sequence.printSequence();
+  } else if (options.typeSort == "shell") {
+    SortMethod<int>* shell = new ShellSort<int>(sequence, options.sizeOfSequence);
+    shell->Sort();
+    std::cout << "Ordenación por ShellSort: ";
+    sequence.printSequence();
+  } else if (options.typeSort == "radix") {
+    SortMethod<int>* radix = new RadixSort<int>(sequence, options.sizeOfSequence);
+    radix->Sort();
+    std::cout << "Ordenación por RadixSort: ";
+    sequence.printSequence();
+  }
   return 0;
 }

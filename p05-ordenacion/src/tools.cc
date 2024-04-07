@@ -21,6 +21,7 @@ void Usage() {
   std::cout << "     - select\n";
   std::cout << "     - quick\n";
   std::cout << "     - heap\n";
+  std::cout << "     - shell\n";
   std::cout << "     - radix\n";
   std::cout << "i -> forma de introducir los datos (manual, random o file). En caso de file, adjuntar fichero\n";
   std::cout << "La opción trace nos permite mostrar la traza durante la ejecución\n";
@@ -38,33 +39,17 @@ Arguments ParseArguments(int argc, char* argv[]) {
   for (int i = 1; i < argc; i++) {
     std::string arg = argv[i];
     if (arg == "-size") {
-      if (i + 1 < argc) {
-        arguments.sizeOfSequence = std::stoi(argv[i + 1]);
-        ++i;
-      } else {
-        throw std::invalid_argument("Falta el argumento para la opción -size");
-      }
+      arguments.sizeOfSequence = std::stoi(argv[i + 1]);
+      ++i;
     } else if (arg == "-ord") {
-      if (i + 1 < argc) {
-        arguments.start = argv[i + 1];
-        ++i;
-      } else {
-        throw std::invalid_argument("Falta el argumento para la opción -ord");
-      }
+      arguments.typeSort = argv[i + 1];
+      ++i;
     } else if (arg == "-init") {
-      if (i + 1 < argc) {
-        arguments.start = argv[i + 1];
-        ++i;
-      } else {
-        throw std::invalid_argument("Falta el argumento para la opción init");
-      }
+      arguments.start = argv[i + 1];
+      ++i;
     } else if (arg == "-trace") {
-      if (i + 1 < argc) {
-        if (argv[i + 1] == "y") arguments.trace == true;
-        if (argv[i + 1] == "n") arguments.trace == false;
-      } else {
-        throw std::invalid_argument("Falta el argumento para la opción -trace");
-      }
+      if (argv[i + 1] == "y") arguments.trace == true;
+      if (argv[i + 1] == "n") arguments.trace == false;
     }
   }
   return arguments;
