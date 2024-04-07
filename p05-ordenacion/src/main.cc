@@ -16,6 +16,7 @@
 #include "../lib/SortMethod/QuickSort.h"
 #include "../lib/SortMethod/HeapSort.h"
 #include "../lib/SortMethod/ShellSort.h"
+#include "../lib/SortMethod/RadixSort.h"
 #include "../lib/Tools/tools.h"
 
 int main(int argc, char* argv[]) {
@@ -27,10 +28,10 @@ int main(int argc, char* argv[]) {
   // selection->Sort();
   // std::cout << "Ordenación por seleccion: ";
   // sequence.printSequence();
-  SortMethod<int>* selection2 = new QuickSort<int>(sequence, options.sizeOfSequence);
-  selection2->Sort();
-  std::cout << "Ordenación por QuickSort: ";
-  sequence.printSequence();
+  // SortMethod<int>* selection2 = new QuickSort<int>(sequence, options.sizeOfSequence);
+  // selection2->Sort();
+  // std::cout << "Ordenación por QuickSort: ";
+  // sequence.printSequence();
   // SortMethod<int>* selection3 = new HeapSort<int>(sequence, options.sizeOfSequence);
   // selection3->Sort();
   // std::cout << "Ordenación por HeapSort: ";
@@ -39,5 +40,9 @@ int main(int argc, char* argv[]) {
   // shell->Sort();
   // std::cout << "Ordenación por ShellSort: ";
   // sequence.printSequence();
+  SortMethod<int>* radix = new RadixSort<int>(sequence, options.sizeOfSequence);
+  radix->Sort();
+  std::cout << "Ordenación por RadixSort: ";
+  sequence.printSequence();
   return 0;
 }

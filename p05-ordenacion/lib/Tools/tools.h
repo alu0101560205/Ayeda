@@ -27,7 +27,7 @@ template <class Key> StaticSequence<Key> MakeSequence(Arguments args) {
   Key number;
   if (args.start == "manual") {
     std::cout << "Introduzca los elementos que desea insertar en la secuencia de tamaño" << args.sizeOfSequence << "\n";
-    for (int i = 0; i < args.sizeOfSequence; i++) {
+    for (size_t i = 0; i < args.sizeOfSequence; i++) {
       std::cout << "Introduzca el valor a insertar: ";
       std::cin >> number;
       sequence.insert(number);
@@ -35,7 +35,7 @@ template <class Key> StaticSequence<Key> MakeSequence(Arguments args) {
     std::cout << std::endl;
   } else if (args.start == "random") {
     srand(time(nullptr));
-    for (int i = 0; i < args.sizeOfSequence; i++) {
+    for (size_t i = 0; i < args.sizeOfSequence; i++) {
       Key randomNumber = rand() % 100 + 1;
       sequence.insert(randomNumber);
     }

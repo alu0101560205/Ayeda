@@ -39,6 +39,9 @@ class StaticSequence : public Sequence<Key> {
     }
     size_t getBlockSize() const { return blockSize_; }
     void printSequence();
+    void clear();
+    Key** begin() const { return table_; }
+    Key** end() const { return table_ + blockSize_; }
   private:
     Key** table_;
     size_t blockSize_; // Tamaño del bloque
@@ -93,6 +96,17 @@ void StaticSequence<Key>::printSequence() {
     std::cout << *table_[i] << " ";
   }
   std::cout << std::endl;
+}
+
+/**
+ * @brief Método para borrar los elementos de la secuencia
+*/
+template <class Key>
+void StaticSequence<Key>::clear() {
+  for (size_t i = 0; i < blockSize_; i++) {
+    delete table_[i];
+    table_[i] = nullptr;
+  }
 }
 
 #endif
