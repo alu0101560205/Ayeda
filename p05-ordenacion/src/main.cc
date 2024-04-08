@@ -17,10 +17,12 @@
 #include "../lib/SortMethod/HeapSort.h"
 #include "../lib/SortMethod/ShellSort.h"
 #include "../lib/SortMethod/RadixSort.h"
+#include "../lib/NIF/NIF.h"
 #include "../lib/Tools/tools.h"
 
 int main(int argc, char* argv[]) {
   Arguments options = ParseArguments(argc, argv);
+  std::cout << "Fichero: " << options.initFile << std::endl;
   StaticSequence<int> sequence = MakeSequence<int>(options);
   std::cout << "Sequencia original: ";
   sequence.printSequence();
