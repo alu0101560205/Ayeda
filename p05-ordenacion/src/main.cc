@@ -22,7 +22,6 @@
 
 int main(int argc, char* argv[]) {
   Arguments options = ParseArguments(argc, argv);
-  std::cout << "Fichero: " << options.initFile << std::endl;
   StaticSequence<int> sequence = MakeSequence<int>(options);
   std::cout << "Sequencia original: ";
   sequence.printSequence();

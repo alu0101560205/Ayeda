@@ -46,7 +46,6 @@ Arguments ParseArguments(int argc, char* argv[]) {
       ++i;
     } else if (arg == "-init") {
       arguments.start = argv[i + 1];
-      std::cout << argv[i + 1] << std::endl;
       ++i;
       if (arguments.start == "file") {
         std::cout << "Entre al if\n";
@@ -54,10 +53,10 @@ Arguments ParseArguments(int argc, char* argv[]) {
         ++i;
       }
     } else if (arg == "-trace") {
-      if (argv[i + 1] == "y") {
+      if (std::string(argv[i + 1]) == "y") {
         arguments.trace = true;
       }
-      if (argv[i + 1] == "n") {
+      if (std::string(argv[i + 1]) == "n") {
         arguments.trace = false;
       }
       ++i;

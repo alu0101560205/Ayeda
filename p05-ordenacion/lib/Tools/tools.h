@@ -43,11 +43,11 @@ template <class Key> StaticSequence<Key> MakeSequence(Arguments args) {
     }
     std::cout << std::endl;
   } else if (args.start == "random") {
-    // srand(time(nullptr));
+    srand(time(nullptr));
     for (size_t i = 0; i < args.sizeOfSequence; i++) {
-      // Key randomNumber = rand() % 100 + 1;
-      // sequence.insert(randomNumber);
-      Key randomNumber = Key();
+      Key randomNumber = rand() % 100 + 1;
+      sequence.insert(randomNumber);
+      // Key randomNumber = Key();
     }
   }
   return sequence;
