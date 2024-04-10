@@ -18,6 +18,7 @@
 #include "../SortMethod/SortMethod.h"
 #include "../SortMethod/RadixSort.h"
 #include "../SortMethod/HeapSort.h"
+#include "../NIF/NIF.h"
 #include <random>
 
 struct Arguments {
@@ -33,11 +34,11 @@ Arguments ParseArguments(int argc, char* argv[]);
 
 template <class Key> StaticSequence<Key> MakeSequence(Arguments args) {
   StaticSequence<Key> sequence(args.sizeOfSequence);
-  Key number;
   if (args.start == "manual") {
     std::cout << "Introduzca los elementos que desea insertar en la secuencia de tamaño" << args.sizeOfSequence << "\n";
     for (size_t i = 0; i < args.sizeOfSequence; i++) {
       std::cout << "Introduzca el valor a insertar: ";
+      Key number;
       std::cin >> number;
       sequence.insert(number);
     }
@@ -45,9 +46,11 @@ template <class Key> StaticSequence<Key> MakeSequence(Arguments args) {
   } else if (args.start == "random") {
     srand(time(nullptr));
     for (size_t i = 0; i < args.sizeOfSequence; i++) {
-      Key randomNumber = rand() % 100 + 1;
+      // Key randomNumber = rand() % 100 + 1;
+      // sequence.insert(randomNumber);
+      Key randomNumber;
+      randomNumber = NIF(); // Utilizamos el constructor por defecto de NIF
       sequence.insert(randomNumber);
-      // Key randomNumber = Key();
     }
   }
   return sequence;

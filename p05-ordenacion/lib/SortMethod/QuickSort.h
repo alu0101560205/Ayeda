@@ -21,7 +21,7 @@ class QuickSort : public SortMethod<Key> {
     QuickSort(StaticSequence<Key>& sequence, size_t size, bool trace) : SortMethod<Key>(sequence, size, trace) {}
     void Sort() const override;
   private:
-    void Qsort(int ini, int fin) const;
+    void Qsort(int ini, int fin, int& counter) const;
 };
 
 /**
@@ -29,19 +29,25 @@ class QuickSort : public SortMethod<Key> {
 */
 template <class Key>
 void QuickSort<Key>::Sort() const {
+  int counter{0};
   int ini = 0; // Indice inicial
   int fin = int(this->sequenceSize_ - 1); // Índice final
-  Qsort(ini, fin);
+  Qsort(ini, fin, counter);
 }
 
 /**
  * @brief Método de ordenación
 */
 template <class Key>
-void QuickSort<Key>::Qsort(int ini, int fin) const {
-  int i{ini}, f{fin}, counter{0};
+void QuickSort<Key>::Qsort(int ini, int fin, int& counter) const {
+  int i{ini}, f{fin};
   Key pivote = this->sequence_[(i + f) / 2]; // Punto de pivote
     while (i <= f) {
+      if (this->trace_) {
+      std::cout << "Iteración " << counter << " : ";
+      this->sequence_.printSequence();
+      counter++; 
+    }
       while (this->sequence_[i] < pivote) i++;
       while (this->sequence_[f] > pivote) f--;
       if (i <= f) {
@@ -49,14 +55,9 @@ void QuickSort<Key>::Qsort(int ini, int fin) const {
         i++;
         f--;
       }
-      if (this->trace_) {
-        std::cout << "Iteración " << counter << " : ";
-        this->sequence_.printSequence();
-        counter++; 
-      }
     }
-    if (ini < f) Qsort(ini, f);
-    if (i < fin) Qsort(i, fin);
+    if (ini < f) Qsort(ini, f, counter);
+    if (i < fin) Qsort(i, fin, counter);
 }
 
 #endif

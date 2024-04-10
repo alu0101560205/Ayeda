@@ -27,7 +27,8 @@ class SelectionMethod : public SortMethod<Key> {
 */
 template <class Key>
 void SelectionMethod<Key>::Sort() const {
-  Key aux, min;
+  Key aux;
+  int min;
   int counter{0};
   for (size_t i = 0; i < this->sequence_.getBlockSize(); i++) {
     min = i;
@@ -39,11 +40,11 @@ void SelectionMethod<Key>::Sort() const {
     aux = this->sequence_[i];
     this->sequence_[i] = this->sequence_[min];
     this->sequence_[min] = aux;
-  }
-  if (this->trace_) {
-    std::cout << "Iteración " << counter << " : ";
-    this->sequence_.printSequence();
-    counter++; 
+    if (this->trace_) {
+      std::cout << "Iteración " << counter << " : ";
+      this->sequence_.printSequence();
+      counter++; 
+    }
   }
 }
 

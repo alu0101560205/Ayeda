@@ -22,7 +22,7 @@
 
 int main(int argc, char* argv[]) {
   Arguments options = ParseArguments(argc, argv);
-  StaticSequence<int> sequence = MakeSequence<int>(options);
+  StaticSequence<NIF> sequence = MakeSequence<NIF>(options);
   std::cout << "Sequencia original: ";
   sequence.printSequence();
   if (options.trace == true) {
@@ -31,27 +31,27 @@ int main(int argc, char* argv[]) {
     std::cout << "La traza del algoritmo no se mostrará\n";
   }
   if (options.typeSort == "select") {
-    SortMethod<int>* selection = new SelectionMethod<int>(sequence, options.sizeOfSequence, options.trace);
+    SortMethod<NIF>* selection = new SelectionMethod<NIF>(sequence, options.sizeOfSequence, options.trace);
     selection->Sort();
     std::cout << "Ordenación por seleccion: ";
     sequence.printSequence();
   } else if (options.typeSort == "quick") {
-    SortMethod<int>* selection2 = new QuickSort<int>(sequence, options.sizeOfSequence, options.trace);
+    SortMethod<NIF>* selection2 = new QuickSort<NIF>(sequence, options.sizeOfSequence, options.trace);
     selection2->Sort();
     std::cout << "Ordenación por QuickSort: ";
     sequence.printSequence();
   } else if (options.typeSort == "heap") {
-    SortMethod<int>* selection3 = new HeapSort<int>(sequence, options.sizeOfSequence, options.trace);
+    SortMethod<NIF>* selection3 = new HeapSort<NIF>(sequence, options.sizeOfSequence, options.trace);
     selection3->Sort();
     std::cout << "Ordenación por HeapSort: ";
     sequence.printSequence();
   } else if (options.typeSort == "shell") {
-    SortMethod<int>* shell = new ShellSort<int>(sequence, options.sizeOfSequence, options.trace);
+    SortMethod<NIF>* shell = new ShellSort<NIF>(sequence, options.sizeOfSequence, options.trace);
     shell->Sort();
     std::cout << "Ordenación por ShellSort: ";
     sequence.printSequence();
   } else if (options.typeSort == "radix") {
-    SortMethod<int>* radix = new RadixSort<int>(sequence, options.sizeOfSequence, options.trace);
+    SortMethod<NIF>* radix = new RadixSort<NIF>(sequence, options.sizeOfSequence, options.trace);
     radix->Sort();
     std::cout << "Ordenación por RadixSort: ";
     sequence.printSequence();
