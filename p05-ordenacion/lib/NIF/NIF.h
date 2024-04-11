@@ -38,6 +38,16 @@ class NIF {
       input >> nif.value_;
       return input;
     }
+    friend NIF operator/(const NIF& nif, int divisor) {
+      long longValue = std::stol(nif.value_);
+      long result = longValue / divisor;
+      return NIF(std::to_string(result));
+    }
+    friend NIF operator%(const NIF& nif, int divisor) {
+      long num = static_cast<long>(nif);
+      num %= divisor;
+      return NIF(std::to_string(num));
+    }
     std::string::const_iterator begin() const {return value_.begin(); }
     std::string::const_iterator end() const { return value_.end(); }
   private:

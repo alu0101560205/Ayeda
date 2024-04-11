@@ -20,15 +20,15 @@ class ShellSort : public SortMethod<Key> {
     ShellSort(StaticSequence<Key> sequence, size_t size, bool trace) : SortMethod<Key>(sequence, size, trace) {}
     void Sort() const override;
   private:
-    void DeltaSort(int delta, int n) const;
+    void DeltaSort(int delta, int n, int& counter) const;
 };
 
 /**
  * @brief Método DeltaSort para ordenar
 */
 template <class Key>
-void ShellSort<Key>::DeltaSort(int delta, int n) const {
-  int x{0}, j{0}, counter{0};
+void ShellSort<Key>::DeltaSort(int delta, int n, int& counter) const {
+  int x{0}, j{0};
   for (int i = delta; i < n; i++) {
     x = this->sequence_[i];
     j = i;
@@ -52,9 +52,10 @@ template <class Key>
 void ShellSort<Key>::Sort() const {
   int n = this->sequence_.getBlockSize() - 1;
   int delta = n;
+  int counter{0};
   while (delta > 1) {
     delta /= 2;
-    DeltaSort(delta, n);
+    DeltaSort(delta, n, counter);
   }
 }
 
