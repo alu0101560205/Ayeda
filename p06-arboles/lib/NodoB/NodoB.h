@@ -19,7 +19,7 @@
 template <class Key>
 class NodoB {
   public:
-    NodoB(Key dato) : dato_(dato) {}
+    NodoB(Key dato, NodoB<Key>* izq = NULL, NodoB<Key>* dcho = NULL) : dato_(dato), izdo_(izq), dcho_(dcho) {}
   proteted:
     Key dato_; // Contiene la información a almacenar en los nodos
     NodoB<Key>* izdo_; // Hijo izquierdo del nodo binario
