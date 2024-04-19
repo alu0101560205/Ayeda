@@ -20,7 +20,10 @@ template <class Key>
 class NodoB {
   public:
     NodoB(Key dato, NodoB<Key>* izq = NULL, NodoB<Key>* dcho = NULL) : dato_(dato), izdo_(izq), dcho_(dcho) {}
-  proteted:
+    NodoB*& getIzq() { return izdo_; }
+    NodoB*& getDer() { return dcho_; }
+    Key getDato() { return dato_; }
+  protected:
     Key dato_; // Contiene la información a almacenar en los nodos
     NodoB<Key>* izdo_; // Hijo izquierdo del nodo binario
     NodoB<Key>* dcho_; // Hijo derecho del nodo binario

@@ -12,6 +12,7 @@
 #ifndef AB_H
 #define AB_H
 #include <iostream>
+#include <queue>
 #include "../NodoB/NodoB.h"
 
 /**
@@ -21,17 +22,18 @@ template <class Key>
 class AB {
   public:
     AB() : raiz_(NULL) {}
-    ~AB() { Podar(raiz) }
+    ~AB() { Podar(raiz_); }
     virtual bool insertar(const Key& k) = 0;
     virtual bool buscar(const Key& k) const = 0;
     void inorden() const;
-    friend operator<<(ostream& os, const Key& k);
     void Podar(NodoB<Key>* &nodo);
     bool EsVacio(NodoB<Key> *nodo);
     bool EsHoja(NodoB<Key> *nodo);
-    const int Tam() { return TamRama(raiz_) }
+    const int Tam() { return TamRama(raiz_); }
     const int TamRama(NodoB<Key> *nodo);
-  private:
+    const int Alt() { return AltN(raiz_); }
+    const int AltN(NodoB<Key> *nodo);
+  protected:
     NodoB<Key>* raiz_;
 };
 
@@ -41,8 +43,8 @@ class AB {
 template <class Key>
 void AB<Key>::Podar(NodoB<Key>* &nodo) {
   if (nodo == NULL) return;
-  Podar(nodo->izdo_); // Podar subárbol izquierdo
-  Podar(nodo->dcho_); // Podar subárbol derecho
+  Podar(nodo->getIzq()); // Podar subárbol izquierdo
+  Podar(nodo->getDer()); // Podar subárbol derecho
   delete nodo; // Eliminar nodo
   nodo = NULL;
 }
@@ -61,7 +63,7 @@ bool AB<Key>::EsVacio(NodoB<Key> *nodo) {
 */
 template <class Key>
 bool AB<Key>::EsHoja(NodoB<Key> *nodo) {
-  return (!nodo->dcho_ && !nodo->izdo_);
+  return (!nodo->getDer() && !nodo->getIzq());
 }
 
 /**
@@ -70,7 +72,30 @@ bool AB<Key>::EsHoja(NodoB<Key> *nodo) {
 template <class Key>
 const int AB<Key>::TamRama(NodoB<Key> *nodo) {
   if(nodo == NULL) return 0;
-  return (1 + TamRama(nodo->izdo_) + TamRama(nodo->dcho_));
+  return (1 + TamRama(nodo->getIzq()) + TamRama(nodo->getDer()));
+}
+
+/**
+ * @brief Método para determinar la altura
+*/
+template <class Key>
+const int AB<Key>::AltN(NodoB<Key> *nodo) {
+  if (nodo == NULL) return 0;
+  int alt_i = AltN(nodo->getIzq());
+  int alt_d = AltN(nodo->getDer());
+  if (alt_d > alt_i) {
+    return ++alt_d;
+  } else {
+    return ++alt_i;
+  }
+}
+
+/**
+ * @brief Sobrecarga del operador de salida
+*/
+template <class Key>
+std::ostream operator<<(std::ostream& os, const AB<Key>& ab) {
+  
 }
 
 #endif
