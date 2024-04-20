@@ -14,7 +14,7 @@
 #include "../lib/NodoB/NodoB.h"
 
 int main() {
-    // Crea una instancia de ArbolBinarioEquilibrado
+
     ABE<int> arbol;
 
     // Inserta algunos elementos en el árbol
@@ -26,12 +26,18 @@ int main() {
     arbol.insertar(12);
     arbol.insertar(18);
 
-    // Muestra los elementos en orden o realiza otras pruebas
     std::cout << arbol;
     std::cout << std::endl;
-    // Puedes agregar un método en la clase ArbolBinarioEquilibrado para imprimir el árbol o verificar su equilibrio
 
-    // Aquí puedes agregar más pruebas según tus necesidades
+    std::cout << "Recorrido inorden:\n";
+    arbol.inorden();
+    std::cout << std::endl;
 
+    arbol.insertar(26);
+    arbol.insertar(87);
+    std::cout << arbol;
+    std::cout << "Recorrido inorden:\n";
+    arbol.inorden();
+    std::cout << std::endl;
     return 0;
 }

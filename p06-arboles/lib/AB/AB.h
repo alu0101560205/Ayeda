@@ -25,7 +25,8 @@ class AB {
     ~AB() { Podar(raiz_); }
     virtual bool insertar(const Key& k) = 0;
     virtual bool buscar(const Key& k) const = 0;
-    void inorden() const;
+    void inordenRecursivo(NodoB<Key>* nodo) const;
+    void inorden() const { inordenRecursivo(raiz_); }
     void Podar(NodoB<Key>* &nodo);
     bool EsVacio(NodoB<Key> *nodo);
     bool EsHoja(NodoB<Key> *nodo);
@@ -33,6 +34,7 @@ class AB {
     const int TamRama(NodoB<Key> *nodo);
     const int Alt() { return AltN(raiz_); }
     const int AltN(NodoB<Key> *nodo);
+    NodoB<Key>*& getRaiz() const { return const_cast<NodoB<Key>*&>(raiz_); }
   protected:
     NodoB<Key>* raiz_;
 };
@@ -91,11 +93,54 @@ const int AB<Key>::AltN(NodoB<Key> *nodo) {
 }
 
 /**
+ * @brief Método para realizar el recorrido inorden
+*/
+template <class Key>
+void AB<Key>::inordenRecursivo(NodoB<Key>* nodo) const {
+  if (nodo) {
+    inordenRecursivo(nodo->getIzq());
+    std::cout << nodo->getDato() << " ";
+    inordenRecursivo(nodo->getDer());
+  }
+}
+
+/**
  * @brief Sobrecarga del operador de salida
 */
 template <class Key>
-std::ostream operator<<(std::ostream& os, const AB<Key>& ab) {
-  
+std::ostream& operator<<(std::ostream& os, const AB<Key>& ab) {
+  std::queue<NodoB<Key>*> cola;
+  // Si el árbol está vacio
+  if (ab.getRaiz() == nullptr) {
+    os << "[.]" << std::endl;
+    return os;
+  }
+  // Agregamos la raiz a la cola
+  cola.push(ab.getRaiz());
+  // Nivel actual
+  int nivel_actual = 0;
+  // Cantidad de nodos en el nivel actual
+  while (!cola.empty()) {
+    os << "Nivel " << nivel_actual << ": ";
+    // Recorrer nodos en el nivel actual
+    int nodos_en_nivel = cola.size();
+    // Recorrer todos los nodos en el nivel actual
+    for (int i = 0; i < nodos_en_nivel; i++) {
+      NodoB<Key>* nodo = cola.front(); // Obtener el nodo del frente de la cola
+      cola.pop(); // Eliminar el nodo de la cola
+      // Imprimir el nodo o subárbol vacío
+      if (nodo) {
+        os << "[" << nodo->getDato() << "] ";
+        cola.push(nodo->getIzq()); // Agregar el hijo izquierdo a la cola
+        cola.push(nodo->getDer()); // Agregar el hijo derecho a la cola
+      } else {
+        os << "[.] ";
+      }
+    }
+    os << std::endl; // Salto de línea al finalizar el nivel
+    nivel_actual++;
+  }
+  return os;  // Devuelve el flujo de salida
 }
 
 #endif

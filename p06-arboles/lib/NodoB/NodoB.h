@@ -21,8 +21,11 @@ class NodoB {
   public:
     NodoB(Key dato, NodoB<Key>* izq = NULL, NodoB<Key>* dcho = NULL) : dato_(dato), izdo_(izq), dcho_(dcho) {}
     NodoB*& getIzq() { return izdo_; }
+    void setIzq(NodoB<Key>* nodo) { izdo_ = nodo; }
     NodoB*& getDer() { return dcho_; }
+    void setDer(NodoB<Key>* nodo) { dcho_ = nodo; }
     Key getDato() { return dato_; }
+    
   protected:
     Key dato_; // Contiene la información a almacenar en los nodos
     NodoB<Key>* izdo_; // Hijo izquierdo del nodo binario

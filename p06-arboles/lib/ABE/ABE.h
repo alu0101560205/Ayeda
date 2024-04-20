@@ -24,7 +24,7 @@ class ABE : public AB<Key> {
     bool insertar(const Key& k) override;
     bool buscar(const Key& k) const override;
   private:
-    void InsertarEquilRama(const Key& k, NodoB<Key> *nodo);
+    bool InsertarEquilRama(const Key& k, NodoB<Key> *nodo);
 };
 
 /**
@@ -34,29 +34,33 @@ template <class Key>
 bool ABE<Key>::insertar(const Key& k) {
   if (this->raiz_ == NULL) {
     this->raiz_ = new NodoB<Key>(k, NULL, NULL);
+    return true;
   } else {
-    InsertarEquilRama(k, this->raiz_);
-    return 1;
+    return InsertarEquilRama(k, this->raiz_);
   }
-  return 0;
 }
 
 /**
  * @brief Método auxiliar para insertar en equilibrio
 */
 template <class Key>
-void ABE<Key>::InsertarEquilRama(const Key& k, NodoB<Key> *nodo) {
+bool ABE<Key>::InsertarEquilRama(const Key& k, NodoB<Key> *nodo) {
+  // Verificamos si el valor ya está en el árbol
+  if (k == nodo->getDato()) return false;
+  // Determinar la rama en la que se debe insertar el nuevo elemento
   if (this->TamRama(nodo->getIzq()) <= this->TamRama(nodo->getDer())) {
     if (nodo->getIzq() != NULL) {
-      InsertarEquilRama(k, nodo->getIzq());
+      return InsertarEquilRama(k, nodo->getIzq()); // Insertar en el subárbol izquierdo
     } else {
-      nodo->getIzq() = new NodoB<Key>(k, NULL, NULL);
+      nodo->setIzq(new NodoB<Key>(k, NULL, NULL)); // Insertar nuevo nodo en el subárbol izquierdo
+      return true;
     }
   } else {
-    if (nodo->getDer() != NULL) {
-      InsertarEquilRama(k, nodo->getDer());
+    if (nodo->getDer() != nullptr) {
+      return InsertarEquilRama(k, nodo->getDer()); // Insertar en el subárbol derecho
     } else {
-      nodo->getDer() = new NodoB<Key>(k, NULL, NULL);
+      nodo->setDer(new NodoB<Key>(k, NULL, NULL));
+      return true;
     }
   }
 }
