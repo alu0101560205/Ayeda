@@ -14,6 +14,8 @@
 #include "../lib/ABB/ABB.h"
 #include "../lib/NodoB/NodoB.h"
 #include "../lib/Tools/tools.h"
+#include <random>
+#include <fstream>
 
 int main(int argc, char* argv[]) {
   Arguments args = ParseArguments(argc, argv);
@@ -33,13 +35,44 @@ int main(int argc, char* argv[]) {
     tree = new ABB<int>;
   }
 
+  // En caso de que se desee generar números random
+  if (args.initType == "random") {
+    std::random_device rd; // Fuente de entropía del sistema
+    std::mt19937 gen(rd()); // Generador de números aleatorios 
+    std::uniform_int_distribution<int> dist(0, 20); // Rango de números enteros aleatorios
+    for (int i = 0; i < args.sequenceSize; ++i) {
+      int randomValue = dist(gen);
+      tree->insertar(randomValue);
+      std::cout << "Insertado: " << randomValue << std::endl;
+    }
+  }
+
+  // En caso de que se desee hacer el árbol desde fichero
+  if (args.initType == "file") {
+    std::string filename = args.fileName;
+    std::ifstream inputFile(filename); // Abrimos el archivo
+    if (!inputFile.is_open()) {
+      std::cerr << "Error: No se pudo abrir el archivo " << filename << std::endl;
+      delete tree;
+      return 1; // Salida con código de error
+    }
+    int value, count{0};
+    while (inputFile >> value && count < args.sequenceSize) {
+      tree->insertar(value);
+      count++;
+      std::cout << "Insertado: " << value << std::endl;
+    }
+    inputFile.close(); // Cerrar el archivo
+  }
+
   int option;
   do {
     std::cout << "\n--- Menú ---\n";
     std::cout << "[0] Salir\n";
     std::cout << "[1] Insertar clave\n";
     std::cout << "[2] Buscar clave\n";
-    std::cout << "[3] Mostrar árbol en orden\n";
+    std::cout << "[3] Mostrar árbol en inorden\n";
+    std::cout << "[4] Mostrar árbol por niveles\n";
     std::cout << "Elige una opción: ";
     std::cin >> option;
     switch (option) {
@@ -69,6 +102,8 @@ int main(int argc, char* argv[]) {
         // Mostrar árbol en orden
         tree->inorden();
         break;
+      case 4:
+        std::cout << *tree << std::endl;
       default:
         std::cout << "Opción no válida. Intenta de nuevo." << std::endl;
         break;
