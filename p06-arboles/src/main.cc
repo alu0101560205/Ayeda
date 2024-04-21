@@ -33,11 +33,11 @@ int main() {
     arbol.inorden();
     std::cout << std::endl;
 
-    arbol.insertar(26);
-    arbol.insertar(87);
-    std::cout << arbol;
-    std::cout << "Recorrido inorden:\n";
-    arbol.inorden();
-    std::cout << std::endl;
+    // arbol.insertar(26);
+    // arbol.insertar(87);
+    // std::cout << arbol;
+    // std::cout << "Recorrido inorden:\n";
+    // arbol.inorden();
+    // std::cout << std::endl;
     return 0;
 }
