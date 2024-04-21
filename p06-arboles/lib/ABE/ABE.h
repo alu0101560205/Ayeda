@@ -63,6 +63,7 @@ bool ABE<Key>::InsertarEquilRama(const Key& k, NodoB<Key> *nodo) {
       return true;
     }
   }
+  return false;
 }
 
 /**

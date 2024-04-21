@@ -22,7 +22,7 @@ template <class Key>
 class AB {
   public:
     AB() : raiz_(NULL) {}
-    ~AB() { Podar(raiz_); }
+    virtual ~AB() { Podar(raiz_); }
     virtual bool insertar(const Key& k) = 0;
     virtual bool buscar(const Key& k) const = 0;
     void inordenRecursivo(NodoB<Key>* nodo) const;

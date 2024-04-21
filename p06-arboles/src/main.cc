@@ -13,44 +13,67 @@
 #include "../lib/ABE/ABE.h"
 #include "../lib/ABB/ABB.h"
 #include "../lib/NodoB/NodoB.h"
+#include "../lib/Tools/tools.h"
 
-int main() {
+int main(int argc, char* argv[]) {
+  Arguments args = ParseArguments(argc, argv);
+  std::cout << "Tipo de árbol: " << (args.treeType == TreeType::ArbolBE ? "ABE" : "ABB") << "\n";
+  std::cout << "Forma de inicialización: " << args.initType << "\n";
+  if (args.initType == "random") {
+    std::cout << "Número de elementos a generar: " << args.sequenceSize << "\n";
+  } else if (args.initType == "file") {
+    std::cout << "Número de elementos a leer: " << args.sequenceSize << "\n";
+    std::cout << "Nombre del archivo: " << args.fileName << "\n";
+  }
+  
+  AB<int>* tree = nullptr;
+  if (args.treeType == TreeType::ArbolBE) {
+    tree = new ABE<int>;
+  } else if (args.treeType == TreeType::ArbolBB) {
+    tree = new ABB<int>;
+  }
 
-    ABE<int> arbol;
-    ABB<int> arbolbusqueda;
-
-    // Inserta algunos elementos en el árbol
-    arbol.insertar(10);
-    arbol.insertar(5);
-    arbol.insertar(15);
-    arbol.insertar(3);
-    arbol.insertar(7);
-    arbol.insertar(12);
-    arbol.insertar(18);
-    
-    std::cout << "Árbol binario equilibrado\n";
-    std::cout << arbol;
-    std::cout << std::endl;
-
-    std::cout << "Recorrido inorden:\n";
-    arbol.inorden();
-    std::cout << std::endl;
-
-    std::cout << "Búsqueda del elemento 8 en el árbol: ";
-    std::cout << arbol.buscar(8) << std::endl << std::endl;
-
-    std::cout << "Arbol binario de búsqueda\n";
-    arbolbusqueda.insertar(10);
-    arbolbusqueda.insertar(8);
-    arbolbusqueda.insertar(2);
-    arbolbusqueda.insertar(15);
-    arbolbusqueda.insertar(14);
-    arbolbusqueda.insertar(3);
-    arbolbusqueda.insertar(12);
-    
-    std::cout << arbolbusqueda << std::endl;
-    std::cout << "Búsqueda del elemento 12 en el árbol: ";
-    std::cout << arbol.buscar(12) << std::endl;
-
-    return 0;
+  int option;
+  do {
+    std::cout << "\n--- Menú ---\n";
+    std::cout << "[0] Salir\n";
+    std::cout << "[1] Insertar clave\n";
+    std::cout << "[2] Buscar clave\n";
+    std::cout << "[3] Mostrar árbol en orden\n";
+    std::cout << "Elige una opción: ";
+    std::cin >> option;
+    switch (option) {
+      case 0:
+        // Salir del programa
+        break;
+      case 1:
+        // Insertar clave
+        int keyToInsert;
+        std::cout << "Introduce la clave a insertar: ";
+        std::cin >> keyToInsert;
+        tree->insertar(keyToInsert);
+        std::cout << *tree << std::endl;
+        break;
+      case 2:
+        // Buscar clave
+        int keyToSearch;
+        std::cout << "Introduce la clave a buscar: ";
+        std::cin >> keyToSearch;
+        if (tree->buscar(keyToSearch)) {
+          std::cout << "La clave " << keyToSearch << " fue encontrada en el árbol." << std::endl;
+        } else {
+          std::cout << "La clave " << keyToSearch << " no fue encontrada en el árbol." << std::endl;
+        }
+        break;
+      case 3:
+        // Mostrar árbol en orden
+        tree->inorden();
+        break;
+      default:
+        std::cout << "Opción no válida. Intenta de nuevo." << std::endl;
+        break;
+      }
+  } while (option != 0);
+  delete tree;
+  return 0;
 }

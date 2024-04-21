@@ -21,11 +21,11 @@ template <class Key>
 class ABB : public AB<Key> {
   public:
     ABB() : AB<Key>() {}
-    bool insertar(const Key& k) override { InsertarRama(this->raiz_, k); }
-    bool buscar(const Key& k) const override { BuscarRama(this->raiz_, k); }
+    bool insertar(const Key& k) override { return InsertarRama(this->raiz_, k); }
+    bool buscar(const Key& k) const override { return BuscarRama(this->raiz_, k); }
   private:
     NodoB<Key>* BuscarRama(NodoB<Key>* nodo, Key clave) const;
-    void InsertarRama(NodoB<Key>* &nodo, Key clave);
+    bool InsertarRama(NodoB<Key>* &nodo, Key clave);
 };
 
 /**
@@ -43,13 +43,16 @@ NodoB<Key>* ABB<Key>::BuscarRama(NodoB<Key>* nodo, Key clave) const {
  * @brief Método auxiliar para la insercción en árbol de búsqueda
 */
 template <class Key>
-void ABB<Key>::InsertarRama(NodoB<Key>* &nodo, Key clave) {
+bool ABB<Key>::InsertarRama(NodoB<Key>* &nodo, Key clave) {
   if (nodo == NULL) {
     nodo = new NodoB<Key>(clave, NULL, NULL);
+    return true;
   } else if (clave < nodo->getDato()) {
-    InsertarRama(nodo->getIzq(), clave);
+    return InsertarRama(nodo->getIzq(), clave);
+  } else if (clave > nodo->getDato()) {
+    return InsertarRama(nodo->getDer(), clave);
   } else {
-    InsertarRama(nodo->getDer(), clave);
+    return false; // Si ya existe, no inserta y devuelve false
   }
 }
 

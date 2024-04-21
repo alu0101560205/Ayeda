@@ -6,7 +6,7 @@ BIN_DIR := .
 
 # Compilador y opciones
 CXX := g++
-CXXFLAGS := -std=c++11 -Wall -I$(LIB_DIR)
+CXXFLAGS := -std=c++17 -Wall -I$(LIB_DIR)
 LDFLAGS :=
 RM := rm -rf
 
