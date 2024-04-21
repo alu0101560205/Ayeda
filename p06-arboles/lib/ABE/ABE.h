@@ -70,7 +70,30 @@ bool ABE<Key>::InsertarEquilRama(const Key& k, NodoB<Key> *nodo) {
 */
 template <class Key>
 bool ABE<Key>::buscar(const Key& k) const {
+  if (this->raiz_ == nullptr) {
+    return false;
+  }
+  // Cola para realizar la búsqueda por niveles
+  std::queue<std::pair<NodoB<Key>*, int>> cola;
+  cola.push({this->raiz_, 0});
 
+  // Realizar la búsqueda por niveles
+  while (!cola.empty()) {
+    auto [nodo, nivel] = cola.front();
+    cola.pop();
+    // Si el nodo es NULL, pasamos al siguiente
+    if (nodo == nullptr) {
+      continue;
+    }
+    // Si el valor del nodo es igual al valor buscado, retornamos true
+    if (nodo->getDato() == k) {
+      return true;
+    }
+    // Insertamos los hijos del nodo en la cola
+    cola.push({nodo->getIzq(), nivel + 1});
+    cola.push({nodo->getDer(), nivel + 1});
+  }
+  return false; // Si no encontramos el valor buscado
 }
 
 #endif

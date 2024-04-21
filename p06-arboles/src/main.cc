@@ -33,6 +33,9 @@ int main() {
     arbol.inorden();
     std::cout << std::endl;
 
+    std::cout << "Búsqueda del elemento 7 en el árbol: ";
+    std::cout << arbol.buscar(8) << std::endl;
+
     // arbol.insertar(26);
     // arbol.insertar(87);
     // std::cout << arbol;
