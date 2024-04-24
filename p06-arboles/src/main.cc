@@ -14,6 +14,7 @@
 #include "../lib/ABB/ABB.h"
 #include "../lib/NodoB/NodoB.h"
 #include "../lib/Tools/tools.h"
+#include "../lib/NIF/NIF.h"
 #include <random>
 #include <fstream>
 
@@ -28,22 +29,25 @@ int main(int argc, char* argv[]) {
     std::cout << "Nombre del archivo: " << args.fileName << "\n";
   }
   
-  AB<int>* tree = nullptr;
+  AB<NIF>* tree = nullptr;
   if (args.treeType == TreeType::ArbolBE) {
-    tree = new ABE<int>;
+    tree = new ABE<NIF>;
   } else if (args.treeType == TreeType::ArbolBB) {
-    tree = new ABB<int>;
+    tree = new ABB<NIF>;
   }
 
   // En caso de que se desee generar números random
   if (args.initType == "random") {
-    std::random_device rd; // Fuente de entropía del sistema
-    std::mt19937 gen(rd()); // Generador de números aleatorios 
-    std::uniform_int_distribution<int> dist(0, 20); // Rango de números enteros aleatorios
+    // std::random_device rd; // Fuente de entropía del sistema
+    // std::mt19937 gen(rd()); // Generador de números aleatorios 
+    // std::uniform_int_distribution<int> dist(0, 100); // Rango de números enteros aleatorios
     for (int i = 0; i < args.sequenceSize; ++i) {
-      int randomValue = dist(gen);
+      // int randomValue = dist(gen);
+      // tree->insertar(randomValue);
+      // std::cout << "Insertado: " << randomValue << std::endl;
+      NIF randomValue = NIF();
       tree->insertar(randomValue);
-      std::cout << "Insertado: " << randomValue << std::endl;
+      std::cout << "Insertado: " << randomValue.getOriginal() << std::endl;
     }
   }
 
@@ -56,16 +60,22 @@ int main(int argc, char* argv[]) {
       delete tree;
       return 1; // Salida con código de error
     }
-    int value, count{0};
+    int count{0};
+    NIF value;
     while (inputFile >> value && count < args.sequenceSize) {
-      tree->insertar(value);
-      count++;
-      std::cout << "Insertado: " << value << std::endl;
+      if (tree->insertar(value.getOriginal())) {
+        count++;
+        std::cout << "Insertado: " << value.getOriginal() << std::endl;
+      } else {
+        std::cerr << "Error al insertar el NIF: " << value.getOriginal() << std::endl;
+      }
     }
     inputFile.close(); // Cerrar el archivo
   }
 
   int option;
+  NIF keyToInsert;
+  NIF keyToSearch;
   do {
     std::cout << "\n--- Menú ---\n";
     std::cout << "[0] Salir\n";
@@ -81,7 +91,6 @@ int main(int argc, char* argv[]) {
         break;
       case 1:
         // Insertar clave
-        int keyToInsert;
         std::cout << "Introduce la clave a insertar: ";
         std::cin >> keyToInsert;
         tree->insertar(keyToInsert);
@@ -89,7 +98,6 @@ int main(int argc, char* argv[]) {
         break;
       case 2:
         // Buscar clave
-        int keyToSearch;
         std::cout << "Introduce la clave a buscar: ";
         std::cin >> keyToSearch;
         if (tree->buscar(keyToSearch)) {
@@ -104,6 +112,7 @@ int main(int argc, char* argv[]) {
         break;
       case 4:
         std::cout << *tree << std::endl;
+        break;
       default:
         std::cout << "Opción no válida. Intenta de nuevo." << std::endl;
         break;
