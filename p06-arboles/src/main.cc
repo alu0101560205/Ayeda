@@ -17,6 +17,8 @@
 #include "../lib/NIF/NIF.h"
 #include <random>
 #include <fstream>
+#include <chrono>
+#include <vector>
 
 int main(int argc, char* argv[]) {
   Arguments args = ParseArguments(argc, argv);
@@ -72,7 +74,17 @@ int main(int argc, char* argv[]) {
     }
     inputFile.close(); // Cerrar el archivo
   }
-
+  ABB<NIF> arbolBusqueda; // Modificacion
+  ABE<NIF> arbolEquilibrado; // Modificacion
+  for (int i = 0; i < 10000; i++) { // Rellenamos los dos árboles
+    NIF valor = NIF();
+    arbolBusqueda.insertar(valor);
+    NIF valor2 = NIF();
+    arbolEquilibrado.insertar(valor2);
+  }
+  // vector con las claves a buscar
+  std::vector<NIF> vector_claves = { NIF("31654782"), NIF("85142369"), NIF("10245803"), NIF("520130507"),
+  NIF("40136958"), NIF("54102369"), NIF("98745632"), NIF("12345678"), NIF("45618216"), NIF("56842369")};
   int option;
   NIF keyToInsert;
   NIF keyToSearch;
@@ -83,6 +95,7 @@ int main(int argc, char* argv[]) {
     std::cout << "[2] Buscar clave\n";
     std::cout << "[3] Mostrar árbol en inorden\n";
     std::cout << "[4] Mostrar árbol por niveles\n";
+    std::cout << "[5] Modificación pedida\n";
     std::cout << "Elige una opción: ";
     std::cin >> option;
     switch (option) {
@@ -112,6 +125,26 @@ int main(int argc, char* argv[]) {
         break;
       case 4:
         std::cout << *tree << std::endl;
+        break;
+      case 5:
+        std::cout << "Tiempo de búsqueda de claves en el árbol de búsqueda" << std::endl;
+        for (const NIF& clave : vector_claves) {
+          auto start = std::chrono::high_resolution_clock::now(); // Tiempo de inicio
+          bool encontrado = arbolBusqueda.buscar(clave); // Realiza la búsqueda
+          auto end = std::chrono::high_resolution_clock::now(); // Tiempo de finalización
+          std::chrono::duration<double> duracion = end - start;
+          std::cout << "Buscar la clave " << clave.getValue() << " en el árbol de Busqueda tardó " << duracion.count() << " segundos." << std::endl;
+        }
+        std::cout << std::endl;
+        std::cout << "Tiempo de búsqueda de claves en el árbol equilibrado" << std::endl;
+        for (const NIF& clave : vector_claves) {
+          auto start = std::chrono::high_resolution_clock::now(); // Tiempo de inicio
+          bool encontrado = arbolEquilibrado.buscar(clave); // Realiza la búsqueda
+          auto end = std::chrono::high_resolution_clock::now(); // Tiempo de finalización
+          std::chrono::duration<double> duracion = end - start;
+          std::cout << "Buscar la clave " << clave.getValue() << " en el árbol Equlibrado tardó " << duracion.count() << " segundos." << std::endl;
+        }
+        std::cout << std::endl;
         break;
       default:
         std::cout << "Opción no válida. Intenta de nuevo." << std::endl;
