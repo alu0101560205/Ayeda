@@ -32,6 +32,8 @@ class AVL : public ABB<Key> {
     void Rotacion_ID(NodoAVL<Key>* &nodo);
     void Rotacion_DI(NodoAVL<Key>* &nodo);
     void Inserta_bal(NodoAVL<Key>* &nodo, NodoAVL<Key>* nuevo, bool& crece);
+    void Insert_re_balancea_izq(NodoAVL<Key>* &nodo, bool &crece);
+    void Insert_re_balancea_der(NodoAVL<Key>* &nodo, bool &crece);
 };
 
 /**
@@ -140,12 +142,61 @@ void AVL<Key>::Inserta_bal(NodoAVL<Key>* &nodo, NodoAVL<Key>* nuevo, bool& crece
     crece = true;
   } else if (nuevo->getDato() < nodo->getDato()) {
     Inserta_bal(nodo->getIzq(), nuevo, crece);
-    if (crece) Insert_re_balancea_izq(nodo);
+    if (crece) Insert_re_balancea_izq(nodo, crece);
   } else {
     Inserta_bal(nodo->getDer(), nuevo, crece);
-    if (crece) Insert_re_balancea_der(nodo);
+    if (crece) Insert_re_balancea_der(nodo, crece);
   }
 }
-// diapositiva 24
+
+/**
+ * @brief Método para rebalancear a la izquierda
+*/
+template <class Key>
+void AVL<Key>::Insert_re_balancea_izq(NodoAVL<Key>* &nodo, bool &crece){
+  switch (nodo->getBalance()) {
+  case -1:
+    nodo->setBalance(0);
+    crece = false;
+    break;
+  case 0:
+    nodo->setBalance(1);
+    break;
+  case 1:
+    NodoAVL<Key>* nodo1 = nodo->getIzq();
+    if (nodo1->getBalance() == 1) {
+      Rotacion_II(nodo);
+    } else {
+      Rotacion_ID(nodo);
+    }
+    crece = false;
+    break;
+  }
+}
+
+/**
+ * @brief Método para rebalancear a la derecha
+*/
+template <class Key>
+void AVL<Key>::Insert_re_balancea_der(NodoAVL<Key>* &nodo, bool &crece) {
+  switch (nodo->getBalance()) {
+  case 1:
+    nodo->setBalance(0);
+    crece = false;
+    break;
+  case 0:
+    nodo->setBalance(-1);
+    break;
+  case -1:
+    NodoAVL<Key>* nodo1 = nodo->getDer();
+    if (nodo1->getBalance() == -1) {
+      Rotacion_DD(nodo);
+    } else {
+      Rotacion_DI(nodo);
+    }
+    crece = false;
+  }
+}
+
 
 #endif
