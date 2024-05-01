@@ -22,6 +22,7 @@ class AVL : public ABB<Key> {
   public:
     AVL() : ABB<Key>(), traza_(false) {}
     bool insertar(const Key& k) override;
+    bool buscar(const Key& k) const override;
     void activarTraza() { traza_ = true; }
     void desactivarTraza() { traza_ = false; }
   private:
@@ -37,11 +38,36 @@ class AVL : public ABB<Key> {
 };
 
 /**
+ * @brief Método para implementar la búsqueda de un elemento en el árbol AVL
+*/
+template <class Key>
+bool AVL<Key>::buscar(const Key& k) const {
+  // Inicia la búsqueda en la raíz del árbol AVL
+  NodoAVL<Key>* nodo = this->raiz_;
+  // Recorre el árbol buscando la clave k
+  while (nodo != nullptr) {
+    // Compara la clave k con la clave del nodo actual
+    if (nodo->getDato() == k) {
+      // La clave coincide, la búsqueda es exitosa
+      return true;
+    } else if (k < nodo->getDato()) {
+      // Si la clave k es menor, ve hacia el hijo izquierdo
+      nodo = static_cast<NodoAVL<Key>*>(nodo->getIzq());
+    } else {
+      // Si la clave k es mayor, ve hacia el hijo derecho
+      nodo = static_cast<NodoAVL<Key>*>(nodo->getDer());
+    }
+  }
+  // Si llegamos aquí, la clave k no se encontró en el árbol
+  return false;
+}
+
+/**
  * @brief Método para implementar la rotación Izquierda-Izquierda
 */
 template <class Key>
 void AVL<Key>::Rotacion_II(NodoAVL<Key>* &nodo) {
-  NodoAVL<Key>* nodo1 = nodo->getIzq();
+  NodoAVL<Key>* nodo1 = static_cast<NodoAVL<Key>*>(nodo->getIzq());
   nodo->setIzq(nodo1->getDer());
   nodo1->setDer(nodo);
   if (nodo1->getBalance() == 1) {
@@ -59,7 +85,7 @@ void AVL<Key>::Rotacion_II(NodoAVL<Key>* &nodo) {
 */
 template <class Key>
 void AVL<Key>::Rotacion_DD(NodoAVL<Key>* &nodo) {
-  NodoAVL<Key>* nodo1 = nodo->getDer();
+  NodoAVL<Key>* nodo1 = static_cast<NodoAVL<Key>*>(nodo->getDer());
   nodo->setDer(nodo1->getIzq());
   nodo1->setIzq(nodo);
   if (nodo1->getBalance() == -1) {
@@ -77,8 +103,8 @@ void AVL<Key>::Rotacion_DD(NodoAVL<Key>* &nodo) {
 */
 template <class Key>
 void AVL<Key>::Rotacion_ID(NodoAVL<Key>* &nodo) {
-  NodoAVL<Key>* nodo1 = nodo->getIzq();
-  NodoAVL<Key>* nodo2 = nodo1->getDer();
+  NodoAVL<Key>* nodo1 = static_cast<NodoAVL<Key>*>(nodo->getIzq());
+  NodoAVL<Key>* nodo2 = static_cast<NodoAVL<Key>*>(nodo1->getDer());
   nodo->setIzq(nodo2->getDer());
   nodo2->setDer(nodo);
   nodo1->setDer(nodo2->getIzq());
@@ -102,8 +128,8 @@ void AVL<Key>::Rotacion_ID(NodoAVL<Key>* &nodo) {
 */
 template <class Key>
 void AVL<Key>::Rotacion_DI(NodoAVL<Key>* &nodo) {
-  NodoAVL<Key>* nodo1 = nodo->getDer();
-  NodoAVL<Key>* nodo2 = nodo1->getIzq();
+  NodoAVL<Key>* nodo1 = static_cast<NodoAVL<Key>*>(nodo->getDer());
+  NodoAVL<Key>* nodo2 = static_cast<NodoAVL<Key>*>(nodo1->getIzq());
   nodo->setDer(nodo2->getIzq());
   nodo2->setIzq(nodo);
   nodo1->setIzq(nodo2->getDer());
@@ -127,9 +153,20 @@ void AVL<Key>::Rotacion_DI(NodoAVL<Key>* &nodo) {
 */
 template <class Key>
 bool AVL<Key>::insertar(const Key& k) {
-  NodoAVL<Key>* nuevo = NodoAVL<Key>*(k, nullptr, nullptr, 0);
+  // Verificamos si la clave ya existe
+  if (buscar(k)) {
+    std::cout << "La clave " << k << " ya existe, no será insertada\n";
+    return false;
+  }
+  NodoAVL<Key>* nuevo = new NodoAVL<Key>(k, nullptr, nullptr, 0); // Creamos nuevo nodo
+  if (!nuevo) {
+    std::cout << "Error al generar el nuevo nodo\n";
+    return false;
+  }
   bool crece = false;
   Inserta_bal(this->raiz_, nuevo, crece);
+  std::cout << "estoy aqui\n";
+  return true;
 }
 
 /**
@@ -141,10 +178,12 @@ void AVL<Key>::Inserta_bal(NodoAVL<Key>* &nodo, NodoAVL<Key>* nuevo, bool& crece
     nodo = nuevo;
     crece = true;
   } else if (nuevo->getDato() < nodo->getDato()) {
-    Inserta_bal(nodo->getIzq(), nuevo, crece);
+    NodoAVL<Key>* izq = static_cast<NodoAVL<Key>*>(nodo->getIzq());
+    Inserta_bal(izq, nuevo, crece);
     if (crece) Insert_re_balancea_izq(nodo, crece);
   } else {
-    Inserta_bal(nodo->getDer(), nuevo, crece);
+    NodoAVL<Key>* der = static_cast<NodoAVL<Key>*>(nodo->getDer());
+    Inserta_bal(der, nuevo, crece);
     if (crece) Insert_re_balancea_der(nodo, crece);
   }
 }
@@ -163,7 +202,7 @@ void AVL<Key>::Insert_re_balancea_izq(NodoAVL<Key>* &nodo, bool &crece){
     nodo->setBalance(1);
     break;
   case 1:
-    NodoAVL<Key>* nodo1 = nodo->getIzq();
+    NodoAVL<Key>* nodo1 = static_cast<NodoAVL<Key>*>(nodo->getIzq());
     if (nodo1->getBalance() == 1) {
       Rotacion_II(nodo);
     } else {
@@ -188,7 +227,7 @@ void AVL<Key>::Insert_re_balancea_der(NodoAVL<Key>* &nodo, bool &crece) {
     nodo->setBalance(-1);
     break;
   case -1:
-    NodoAVL<Key>* nodo1 = nodo->getDer();
+    NodoAVL<Key>* nodo1 = static_cast<NodoAVL<Key>*>(nodo->getDer());
     if (nodo1->getBalance() == -1) {
       Rotacion_DD(nodo);
     } else {
