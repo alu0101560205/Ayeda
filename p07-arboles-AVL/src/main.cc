@@ -16,6 +16,7 @@
 #include "../lib/Tools/tools.h"
 #include "../lib/AVL/AVL.h"
 #include "../lib/NIF/NIF.h"
+#include "../lib/NIF/Monopoli.h"
 #include <random>
 #include <fstream>
 #include <chrono>

@@ -165,7 +165,6 @@ bool AVL<Key>::insertar(const Key& k) {
   }
   bool crece = false;
   Inserta_bal(this->raiz_, nuevo, crece);
-  std::cout << "estoy aqui\n";
   return true;
 }
 
